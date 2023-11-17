@@ -275,6 +275,15 @@ body {
   opacity: 0;
 }
 
+.fourth-page__nails-wrapper {
+  position: relative;
+  position: relative;
+  margin: 56px auto 0 auto;
+  /* transform: translate(26%, 17%); */
+  width: 320px;
+  height: 100%;
+}
+
 .fourth-page__nail_active {
   opacity: 1;
 }
