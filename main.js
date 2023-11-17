@@ -10,6 +10,8 @@ const fourthPageButton = fourthPage.querySelector('.fourth-page__button');
 const fourthPageInfo = fourthPage.querySelector('.fourth-page__info');
 const nails = fourthPage.querySelectorAll('.fourth-page__nail');
 const nailButtons = fourthPage.querySelectorAll('.fourth-page__circle');
+const onBtn = document.getElementById('on');
+const offBtn = document.getElementById('off');
 
 
 firstPageButton.addEventListener('click', () => {
@@ -74,3 +76,34 @@ nailButtons.forEach((elem, index) => {
     fourthPageVideo.classList.add('fourth-page__video_active');
   });
 });
+
+function startCamera() {
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+      .then((stream) => {
+          fourthPageVideo.srcObject = stream;
+          fourthPageInfo.classList.add('fourth-page__info_disabled');
+          nails.forEach((nail) => {
+            nail.classList.add('fourth-page__nail_active');
+          });
+      })
+      .catch((error) => {
+          console.error('Ошибка доступа к камере:', error);
+      });
+}
+
+function stopCamera() {
+  const stream = fourthPageVideo.srcObject;
+  const tracks = stream.getTracks();
+
+  tracks.forEach(track => track.stop());
+
+  fourthPageVideo.srcObject = null;
+}
+
+onBtn.addEventListener('click', () => {
+  startCamera();
+})
+
+offBtn.addEventListener('click', () => {
+  stopCamera();
+})

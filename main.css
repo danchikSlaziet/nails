@@ -326,3 +326,8 @@ body {
   width: 67.705px;
   height: 67.705px;
 }
+
+.on-off {
+  position: absolute;
+  bottom: 40px;
+}
