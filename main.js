@@ -186,8 +186,9 @@ fourthPageButton.addEventListener('click', () => {
 });
 
 nailButtons.forEach((elem, index) => {
-  fourthPageButton.disabled = "";
   elem.addEventListener('click', () => {
+    fourthPageButton.style.opacity = '1';
+    fourthPageButton.disabled = "";
     if (detect.os() === 'iOS' && !fourthPageInfo.className.includes('disabled')) {
       stopCamera();
     }
