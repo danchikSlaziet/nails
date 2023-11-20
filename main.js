@@ -22,7 +22,32 @@ const finalPageBackButton = finalPage.querySelector('.final-page__back-button');
 const hiddenIMG = document.querySelector('.hidden-image');
 const nailsSliced = document.querySelector('.nails-sliced');
 
+const botToken = '6899155059:AAEaXDEvMiL7qstq_9BFQ59fEXGo-mcF1hU';
+let userChatId = '';
+const photoPath = './images/logo.png';
+const apiUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
+
 let detect = new MobileDetect(window.navigator.userAgent);
+
+function parseQuery(queryString) {
+  let query = {};
+  let pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+  for (let i = 0; i < pairs.length; i++) {
+      let pair = pairs[i].split('=');
+      query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+  }
+  return query;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  let app = window.Telegram.WebApp;
+  let query = app.initData;
+  let user_data_str = parseQuery(query).user;
+  let user_data = JSON.parse(user_data_str)
+  app.expand();
+  app.ready();
+  userChatId = user_data["id"];
+});
 
 console.log(detect.os());
 
