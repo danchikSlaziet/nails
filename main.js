@@ -69,9 +69,10 @@ if (detect.os() === 'iOS') {
 
 secondPageInput.addEventListener('focus', () => {
   if (detect.os() === 'iOS') {
-    secondPageInput.style.transform = 'translateY(-90px)'; // Регулируйте значение сдвига
+    secondPageInput.style.transform = 'translateY(-90px)';
     secondPageLabel.style.transform = 'translateY(-90px)';
-    secondPageText.style.transform = 'translateY(-50px)'; 
+    secondPageButton.style.transform = 'translateY(-90px)';
+    secondPageText.style.transform = 'translateY(-90px)'; 
   }
 });
 
@@ -79,7 +80,10 @@ secondPageInput.addEventListener('blur', () => {
   if (detect.os() === 'iOS') {
     secondPageInput.style.transform = 'translateY(0)';
     secondPageLabel.style.transform = 'translateY(0)';
-    secondPageText.style.transform = 'translateY(0)'; 
+    secondPageText.style.transform = 'translateY(0)';
+    secondPageButton.style.transform = 'translateY(0)';
+    window.scrollTo({top: 0, behavior: "smooth"});
+
   }
 });
 
