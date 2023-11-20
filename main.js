@@ -63,9 +63,9 @@ document.addEventListener('click', function(event) {
 
 console.log(detect.os());
 
-if (detect.os() === 'iOS') {
-  fourthPageButton.textContent = 'Продолжить'
-}
+// if (detect.os() === 'iOS') {
+//   fourthPageButton.textContent = 'Продолжить'
+// }
 
 secondPageInput.addEventListener('focus', () => {
   if (detect.os() === 'iOS') {
@@ -83,7 +83,6 @@ secondPageInput.addEventListener('blur', () => {
     secondPageText.style.transform = 'translateY(0)';
     secondPageButton.style.transform = 'translateY(0)';
     window.scrollTo({top: 0, behavior: "smooth"});
-
   }
 });
 
@@ -144,10 +143,12 @@ finalPageSendButton.addEventListener('click', () => {
   sendPhoto(finalPageIMG);
 })
 
-fourthPageButton.addEventListener('click', () => {
+fourthPageButton.addEventListener('click', () => { 
   if (detect.os() === 'iOS') {
     startCamera();
-    fourthPageButton.textContent = 'Сохранить'
+    // if (fourthPageButton.disabled) {
+    //   fourthPageButton.textContent = 'Сохранить';
+    // }
   }
   if (fourthPageInfo.className.includes('disabled')) {
   
@@ -182,9 +183,10 @@ fourthPageButton.addEventListener('click', () => {
     fourthPage.classList.add('fourth-page_disabled');
     finalPage.classList.remove('final-page_disabled');
   }
-})
+});
 
 nailButtons.forEach((elem, index) => {
+  fourthPageButton.disabled = "";
   elem.addEventListener('click', () => {
     if (detect.os() === 'iOS' && !fourthPageInfo.className.includes('disabled')) {
       stopCamera();
@@ -232,7 +234,7 @@ function startCamera() {
   navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
       .then((stream) => {
           fourthPageVideo.srcObject = stream;
-          if (!fourthPage.className.includes('disabled')) {
+          if (!fourthPage.className.includes('disabled') && fourthPageButton.disabled) {
             fourthPageInfo.classList.add('fourth-page__info_disabled');
           }
       })
