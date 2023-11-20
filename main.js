@@ -10,7 +10,6 @@ const fourthPageButton = fourthPage.querySelector('.fourth-page__button');
 const fourthPageInfo = fourthPage.querySelector('.fourth-page__info');
 const fourthPageTextChoose = fourthPage.querySelector('.fourth-page__text_choose');
 const fourthPageScreen = fourthPage.querySelector('.fourth-page__screen');
-const nails = fourthPage.querySelectorAll('.fourth-page__nail');
 const nailButtons = fourthPage.querySelectorAll('.fourth-page__circle');
 const finalPage = document.querySelector('.final-page');
 const finalPageIMG = finalPage.querySelector('.final-page__img');
@@ -162,25 +161,19 @@ nailButtons.forEach((elem, index) => {
         nailButtons[0].src = './images/nail-circle-1-active.svg';
         nailButtons[1].src = './images/nail-circle-2.svg';
         nailButtons[2].src = './images/nail-circle-3.svg';
-        nails.forEach((nail, index) => {
-          nail.src = `./images/red-${index + 1}.png`;
-        });
+        nailsSliced.src = './images/red.png';
         break;
       case 1:
         nailButtons[1].src = './images/nail-circle-2-active.svg';
         nailButtons[0].src = './images/nail-circle-1.svg';
         nailButtons[2].src = './images/nail-circle-3.svg';
-        nails.forEach((nail, index) => {
-          nail.src = `./images/blue-${index + 1}.png`;
-        });
+        nailsSliced.src = './images/blue.png';
         break;
       case 2:
         nailButtons[2].src = './images/nail-circle-3-active.svg';
         nailButtons[1].src = './images/nail-circle-2.svg';
         nailButtons[0].src = './images/nail-circle-1.svg';
-        nails.forEach((nail, index) => {
-          nail.src = `./images/gray-${index + 1}.png`;
-        });
+        nailsSliced.src = './images/gray.png';
         break;
     
       default:
@@ -189,6 +182,7 @@ nailButtons.forEach((elem, index) => {
     if (!fourthPageVideo.className.includes('active')) {
       navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
       .then((stream) => {
+          nailsSliced.style.opacity = 1;
           fourthPageVideo.srcObject = stream;
           fourthPageInfo.classList.add('fourth-page__info_disabled');
           fourthPageTextChoose.style.display = 'none';

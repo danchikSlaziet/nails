@@ -466,4 +466,6 @@ body {
   width: 262px;
   height: 286px;
   display: block;
+  pointer-events: none;
+  opacity: 0;
 }
