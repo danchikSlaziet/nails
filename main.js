@@ -122,7 +122,7 @@ fourthPageButton.addEventListener('click', () => {
     const tempCanvas = document.createElement('canvas');
     const tempCtx = tempCanvas.getContext('2d');
 
-    const scaleFactor = 1;
+    const scaleFactor = 2;
     tempCanvas.width = fourthPageVideo.clientWidth*scaleFactor;
     tempCanvas.height = fourthPageVideo.clientHeight*scaleFactor;
 
@@ -153,7 +153,7 @@ fourthPageButton.addEventListener('click', () => {
 
 nailButtons.forEach((elem, index) => {
   elem.addEventListener('click', () => {
-    if (detect.os() === 'iOS') {
+    if (detect.os() === 'iOS' && !fourthPageInfo.className.includes('disabled')) {
       stopCamera();
     }
     switch (index) {
