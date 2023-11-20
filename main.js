@@ -2,6 +2,9 @@ const firstPage = document.querySelector('.first-page');
 const firstPageButton = firstPage.querySelector('.first-page__button');
 const secondPage = document.querySelector('.second-page');
 const secondPageButton = secondPage.querySelector('.second-page__button');
+const secondPageInput = secondPage.querySelector('.second-page__input');
+const secondPageLabel = secondPage.querySelector('.second-page__label');
+const secondPageText = secondPage.querySelector('.second-page__text');
 const thirdPage = document.querySelector('.third-page');
 const thirdPageButton = thirdPage.querySelector('.third-page__button');
 const fourthPage = document.querySelector('.fourth-page');
@@ -53,6 +56,22 @@ console.log(detect.os());
 if (detect.os() === 'iOS') {
   fourthPageButton.textContent = 'Продолжить'
 }
+
+secondPageInput.addEventListener('focus', () => {
+  if (detect.os() === 'iOS') {
+    secondPageInput.style.transform = 'translateY(-90px)'; // Регулируйте значение сдвига
+    secondPageLabel.style.transform = 'translateY(-90px)';
+    secondPageText.style.transform = 'translateY(-50px)'; 
+  }
+});
+
+secondPageInput.addEventListener('blur', () => {
+  if (detect.os() === 'iOS') {
+    secondPageInput.style.transform = 'translateY(0)';
+    secondPageLabel.style.transform = 'translateY(0)';
+    secondPageText.style.transform = 'translateY(0)'; 
+  }
+});
 
 
 firstPageButton.addEventListener('click', () => {

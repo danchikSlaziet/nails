@@ -106,6 +106,7 @@ body {
   padding: 25px 13px 49px 26px;
   margin-bottom: 85px;
   margin-top: 15px;
+  transition: transform .3s ease-out;
 }
 
 .second-page__label {
@@ -116,6 +117,7 @@ body {
   line-height: 100%;
   margin-bottom: 21px;
   text-align: center;
+  transition: transform .3s ease-out;
 }
 
 .second-page__input {
@@ -130,6 +132,7 @@ body {
   font-size: 20px;
   line-height: 100%;
   margin-bottom: 21px;
+  transition: transform .3s ease-out;
 }
 
 .second-page__button {
