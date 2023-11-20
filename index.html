@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NAILS</title>
   <link rel="stylesheet" href="./main.css">
+  <script defer src="mobile-detect.min.js"></script>
 </head>
 <body>
   <div class="first-page">
@@ -47,10 +48,6 @@
     </button>
   </div>
   <div class="fourth-page fourth-page_disabled">
-    <div class="on-off">
-      <button id="on">on</button>
-      <button id="off">off</button>
-    </div>
     <div class="fourth-page__screen">
       <div class="fourth-page__info">
         <img class="fourth-page__icon" src="./images/fourth-page-icon.svg" alt="">
@@ -58,26 +55,48 @@
           Помести руку в область на экране,
           чтобы примерить наш маникюр
         </p>
-        <p class="fourth-page__text">
-          Выбери маникюр
-        </p>
       </div>
       <div class="fourth-page__nails-bar">
+        <p class="fourth-page__text fourth-page__text_choose">
+          Выбери маникюр
+        </p>
         <img class="fourth-page__circle" src="./images/nail-circle-1.svg" alt="">
         <img class="fourth-page__circle" src="./images/nail-circle-2.svg" alt="">
         <img class="fourth-page__circle" src="./images/nail-circle-3.svg" alt="">
       </div>
       <video class="fourth-page__video" playsinline autoplay muted></video>
-      <div class="fourth-page__nails-wrapper">
+      <!-- <div class="fourth-page__nails-wrapper">
         <img class="fourth-page__nail fourth-page__nail_first" src="./images/red-1.png" alt="nail">
         <img class="fourth-page__nail fourth-page__nail_second" src="./images/red-2.png" alt="nail">
         <img class="fourth-page__nail fourth-page__nail_third" src="./images/red-3.png" alt="nail">
         <img class="fourth-page__nail fourth-page__nail_fourth" src="./images/red-4.png" alt="nail">
         <img class="fourth-page__nail fourth-page__nail_fifth" src="./images/red-5.png" alt="nail">
-      </div>
+      </div> -->
+      <!-- <img class="fourth-page__nail fourth-page__nail_first" src="./images/red-1.png" alt="nail">
+      <img class="fourth-page__nail fourth-page__nail_second" src="./images/red-2.png" alt="nail">
+      <img class="fourth-page__nail fourth-page__nail_third" src="./images/red-3.png" alt="nail">
+      <img class="fourth-page__nail fourth-page__nail_fourth" src="./images/red-4.png" alt="nail">
+      <img class="fourth-page__nail fourth-page__nail_fifth" src="./images/red-5.png" alt="nail"> -->
+      <img class="nails-sliced" src="./images/nails-sliced.png" alt="">
+      <img class="hidden-image" src="" alt="">
     </div>
     <button class="fourth-page__button button">
       Сохранить
+    </button>
+  </div>
+  <div class="final-page final-page_disabled">
+    <p class="final-page__text text">
+      Чтобы участвововать в конкурсе от МТС,
+      оставь свой номер
+      для проверки подписки
+      МТС Premium
+    </p>
+    <img class="final-page__img" src="" alt="hand with nails">
+    <button class="button final-page__send-button">
+      отправить
+    </button>
+    <button class="button final-page__back-button">
+      Создать еще
     </button>
   </div>
   <script src="./main.js" type="module"></script>
