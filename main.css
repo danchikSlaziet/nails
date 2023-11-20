@@ -415,7 +415,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 100vh;
+  min-height: 100vh;
   padding: 0 24px;
   background: linear-gradient(347deg, #FFD4C9 -2.24%, #EDCCD3 16.66%, #BFB8ED 52.9%, #9FAAFF 76.53%, #A1A1FF 103.3%);
 }
@@ -426,12 +426,6 @@ body {
   margin-top: 10px;
   padding: 25px 13px 27px 26px;
   margin-bottom: 17px;
-}
-
-@media screen and (max-height: 730px) {
-  .final-page__text {
-    font-size: 17px;
-  }
 }
 
 .final-page__img {
@@ -445,7 +439,7 @@ body {
   object-fit: cover;
   object-position: center top;
   width: 100%;
-  height: 40%;
+  height: 50%;
   margin-bottom: 18px;
 }
 
