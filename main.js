@@ -51,6 +51,16 @@ window.addEventListener('DOMContentLoaded', () => {
   userChatId = user_data["id"];
 });
 
+document.addEventListener('click', function(event) {
+  // Проверяем, был ли клик вне элемента input
+  var isClickInsideInput = event.target.tagName === 'INPUT';
+  
+  // Если клик был вне элемента input, скрываем клавиатуру
+  if (!isClickInsideInput) {
+    document.activeElement.blur(); // Снимаем фокус с активного элемента (в данном случае, инпута)
+  }
+});
+
 console.log(detect.os());
 
 if (detect.os() === 'iOS') {
