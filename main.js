@@ -186,9 +186,6 @@ nailButtons.forEach((elem, index) => {
           fourthPageVideo.srcObject = stream;
           fourthPageInfo.classList.add('fourth-page__info_disabled');
           fourthPageTextChoose.style.display = 'none';
-          nails.forEach((nail) => {
-            nail.classList.add('fourth-page__nail_active');
-          });
       })
       .catch((error) => {
           console.error('Ошибка доступа к камере:', error);
@@ -204,9 +201,6 @@ function startCamera() {
           fourthPageVideo.srcObject = stream;
           if (!fourthPage.className.includes('disabled')) {
             fourthPageInfo.classList.add('fourth-page__info_disabled');
-            nails.forEach((nail) => {
-              nail.classList.add('fourth-page__nail_active');
-            });
           }
       })
       .catch((error) => {
