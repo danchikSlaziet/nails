@@ -293,7 +293,7 @@ button:hover {
   position: absolute;
   bottom: 24px;
   width: 90%;
-  z-index: 10;
+  z-index: 110;
 }
 
 .fourth-page__video {
@@ -305,6 +305,7 @@ button:hover {
   box-sizing: border-box;
   border-radius: 16px;
   border: 1px solid #FFF;
+  z-index: 100;
 }
 
 .fourth-page__video_active {
@@ -479,6 +480,7 @@ button:hover {
   object-fit: cover;
   width: 262px;
   height: 286px;
+  z-index: 1000;
   display: block;
   pointer-events: none;
   opacity: 0;
