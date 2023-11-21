@@ -20,6 +20,10 @@ body {
   position: relative;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 .text {
   color: #000;
   font-size: 24px;
