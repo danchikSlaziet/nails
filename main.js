@@ -67,6 +67,22 @@ console.log(detect.os());
 //   fourthPageButton.textContent = 'Продолжить'
 // }
 
+const phoneMask = new IMask(secondPageInput, {
+  mask: "+{7} (000) 000-00-00",
+});
+
+function phoneInputHandler() {
+  if (phoneMask.masked.isComplete) {
+    secondPageButton.disabled = false;
+  } else {
+    secondPageButton.disabled = true;
+  }
+}
+
+secondPageInput.addEventListener('input', () => {
+  phoneInputHandler();
+})
+
 secondPageInput.addEventListener('focus', () => {
   if (detect.os() === 'iOS') {
     secondPageInput.style.transform = 'translateY(-90px)';

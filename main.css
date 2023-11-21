@@ -140,6 +140,10 @@ button:hover {
   transition: transform .3s ease-out;
 }
 
+.second-page__button:disabled {
+  opacity: .2;
+}
+
 .second-page__button {
   border: none;
   outline: none;
