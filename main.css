@@ -18,6 +18,8 @@ body {
   font-family: 'MTS', sans-serif;
   font-feature-settings: 'clig' off, 'liga' off;
   position: relative;
+  min-height: 100vh;
+  background: linear-gradient(347deg, #FFD4C9 -2.24%, #EDCCD3 16.66%, #BFB8ED 52.9%, #9FAAFF 76.53%, #A1A1FF 103.3%);
 }
 
 button:hover {
@@ -66,10 +68,15 @@ button:hover {
   min-height: 100vh;
   padding: 0 24px;
   background: linear-gradient(347deg, #FFD4C9 -2.24%, #EDCCD3 16.66%, #BFB8ED 52.9%, #9FAAFF 76.53%, #A1A1FF 103.3%);
+  visibility: visible;
+  opacity: 1;
+  transition: visibility .5s, opacity .5s ease-out;
 }
 
 .first-page_disabled {
   display: none;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .first-page__text {
@@ -101,10 +108,14 @@ button:hover {
   height: 100vh;
   padding: 0 24px;
   background: linear-gradient(347deg, #FFD4C9 -2.24%, #EDCCD3 16.66%, #BFB8ED 52.9%, #9FAAFF 76.53%, #A1A1FF 103.3%);
+  visibility: visible;
+  opacity: 1;
+  transition: visibility .5s, opacity .5s ease-out;
 }
 
 .second-page_disabled {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .second-page__text {
@@ -158,7 +169,7 @@ button:hover {
   background: #000;
   backdrop-filter: blur(15px);
   position: relative;
-  transition: transform .3s ease-out;
+  transition: transform .3s ease-out, opacity .24s linear;
 }
 
 @media screen and (max-width: 390px) {
@@ -200,10 +211,15 @@ button:hover {
   min-height: 100vh;
   padding: 0 24px;
   background: linear-gradient(347deg, #FFD4C9 -2.24%, #EDCCD3 16.66%, #BFB8ED 52.9%, #9FAAFF 76.53%, #A1A1FF 103.3%);
+  visibility: visible;
+  opacity: 1;
+  transition: visibility .5s, opacity .5s ease-out;
 }
 
 .third-page_disabled {
-  display: none;
+  /* display: none; */
+  visibility: hidden;
+  opacity: 0;
 }
 
 .third-page__check-mark {
@@ -245,10 +261,15 @@ button:hover {
   height: 100vh;
   padding: 0 24px;
   background: linear-gradient(347deg, #FFD4C9 -2.24%, #EDCCD3 16.66%, #BFB8ED 52.9%, #9FAAFF 76.53%, #A1A1FF 103.3%);
+  visibility: visible;
+  opacity: 1;
+  transition: visibility .5s, opacity .5s ease-out;
 }
 
 .fourth-page_disabled {
-  display: none;
+  /* display: none; */
+  visibility: hidden;
+  opacity: 0;
 }
 .fourth-page__screen {
   border-radius: 16px;
@@ -433,9 +454,14 @@ button:hover {
   min-height: 100vh;
   padding: 0 24px;
   background: linear-gradient(347deg, #FFD4C9 -2.24%, #EDCCD3 16.66%, #BFB8ED 52.9%, #9FAAFF 76.53%, #A1A1FF 103.3%);
+  visibility: visible;
+  opacity: 1;
+  transition: visibility .5s, opacity .5s ease-out;
 }
 .final-page_disabled {
   display: none;
+  visibility: hidden;
+  opacity: 0;
 }
 .final-page__text {
   margin-top: 10px;

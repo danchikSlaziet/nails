@@ -125,6 +125,8 @@ async function sendPhoto(assetElement) {
   // Получение ссылки на изображение
   const imageURL = assetElement.src;
 
+  finalPageSendButton.textContent = 'Отправка ...';
+
   // Загрузка изображения в бинарном формате
   const response = await fetch(imageURL);
   const imageBlob = await response.blob();
@@ -147,11 +149,14 @@ async function sendPhoto(assetElement) {
       console.log(data);
       if (data.ok) {
           console.log('Фотография успешно отправлена в Telegram.');
+          finalPageSendButton.textContent = 'Отправлено';
       } else {
           console.error('Произошла ошибка при отправке фотографии.');
+          finalPageSendButton.textContent = 'Ошибка';
       }
   } catch (error) {
       console.error('Ошибка:', error);
+      finalPageSendButton.textContent = 'Ошибка';
   }
 }
 
@@ -272,4 +277,5 @@ function stopCamera() {
 finalPageBackButton.addEventListener('click', () => {
   finalPage.classList.add('final-page_disabled');
   fourthPage.classList.remove('fourth-page_disabled');
+  finalPageSendButton.textContent = 'Отправить';
 });
