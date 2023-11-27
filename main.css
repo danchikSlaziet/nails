@@ -314,13 +314,13 @@ button:hover {
   position: absolute;
   bottom: 24px;
   width: 90%;
-  z-index: 110;
+  z-index: 999;
 }
 
 .fourth-page__video {
   display: none;
   border: 1px solid #FFF;
-  z-index: 109;
+  z-index: 998;
   position: absolute;
   /* width: initial; */
   height: 100%;
