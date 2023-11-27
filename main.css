@@ -319,14 +319,14 @@ button:hover {
 
 .fourth-page__video {
   display: none;
+  border: 1px solid #FFF;
+  z-index: 109;
   position: absolute;
-  /* width: 100%; */
+  width: initial;
   height: 100%;
-  /* object-fit: cover; */
   box-sizing: border-box;
   border-radius: 16px;
-  border: 1px solid #FFF;
-  z-index: 100;
+  pointer-events: none;
 }
 
 .fourth-page__video_active {
