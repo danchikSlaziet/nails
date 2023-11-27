@@ -322,7 +322,7 @@ button:hover {
   border: 1px solid #FFF;
   z-index: 109;
   position: absolute;
-  width: initial;
+  /* width: initial; */
   height: 100%;
   box-sizing: border-box;
   border-radius: 16px;
