@@ -114,6 +114,15 @@ firstPageButton.addEventListener('click', () => {
 secondPageButton.addEventListener('click', () => {
   secondPage.classList.add('second-page_disabled');
   thirdPage.classList.remove('third-page_disabled');
+  secondPageInput.addEventListener('blur', () => {
+    if (detect.os() === 'iOS') {
+      secondPageInput.style.transform = 'translateY(0)';
+      secondPageLabel.style.transform = 'translateY(0)';
+      secondPageText.style.transform = 'translateY(0)';
+      secondPageButton.style.transform = 'translateY(0)';
+      window.scrollTo({top: 0, behavior: "smooth"});
+    }
+  });
 });
 
 thirdPageButton.addEventListener('click', () => {
