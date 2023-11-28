@@ -149,6 +149,12 @@ button:hover {
   transition: transform .3s ease-out;
 }
 
+@media screen and (max-width: 448px) {
+  .second-page__label {
+    font-size: 12px;
+  }
+}
+
 .second-page__input {
   outline: none;
   border: none;
@@ -534,12 +540,13 @@ button:hover {
   position: absolute;
   top: 30px;
   object-fit: cover;
-  width: 270px;
-  aspect-ratio: 328 / 337;
   z-index: 1000;
   display: block;
   pointer-events: none;
   opacity: 0;
+  width: 270px;
+  aspect-ratio: 335 / 337;
+  background-color: transparent;
 }
 
 /* ======== END-PAGE ============== */
