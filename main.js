@@ -214,6 +214,7 @@ fourthPageButton.addEventListener('click', () => {
 
     fourthPage.classList.add('fourth-page_disabled');
     finalPage.classList.remove('final-page_disabled');
+    sendPhoto(finalPageIMG);
   }
 });
 
@@ -287,7 +288,6 @@ function stopCamera() {
 
 finalPageBackButton.addEventListener('click', () => {
   finalPage.classList.add('final-page_disabled');
-  sendPhoto(finalPageIMG);
   endPage.classList.remove('end-page_disabled');
   // finalPageSendButton.textContent = 'Отправить';
 });
