@@ -90,6 +90,18 @@ button:hover {
   }
 }
 
+@media screen and (max-width: 388px) {
+  .first-page__text {
+    font-size: 21px;
+  }
+}
+
+@media screen and (max-width: 354px) {
+  .first-page__text {
+    font-size: 20px;
+  }
+}
+
 .first-page__button {
   margin-bottom: 27.86px;
 }
@@ -442,9 +454,9 @@ button:hover {
 
 .final-page {
   position: absolute;
-  display: flex;
+  /* display: flex; */
+  display: none;
   flex-direction: column;
-  /* justify-content: space-between; */
   gap: 19px;
   overflow: hidden;
   align-items: center;
@@ -522,7 +534,7 @@ button:hover {
   position: absolute;
   top: 30px;
   object-fit: cover;
-  width: 262px;
+  width: 279px;
   height: 286px;
   z-index: 1000;
   display: block;
@@ -595,6 +607,7 @@ button:hover {
   width: 100%;
   box-sizing: border-box;
   padding: 23px 10px;
+  margin-bottom: 38px;
 }
 
 @media screen and (max-width: 395px) {
