@@ -16,8 +16,10 @@ const fourthPageScreen = fourthPage.querySelector('.fourth-page__screen');
 const nailButtons = fourthPage.querySelectorAll('.fourth-page__circle');
 const finalPage = document.querySelector('.final-page');
 const finalPageIMG = finalPage.querySelector('.final-page__img');
-const finalPageSendButton = finalPage.querySelector('.final-page__send-button');
+// const finalPageSendButton = finalPage.querySelector('.final-page__send-button');
 const finalPageBackButton = finalPage.querySelector('.final-page__back-button');
+const endPage = document.querySelector('.end-page');
+const endPageButton = endPage.querySelector('.end-page__button');
 
 
 // additional constants for debug and help
@@ -134,7 +136,7 @@ async function sendPhoto(assetElement) {
   // Получение ссылки на изображение
   const imageURL = assetElement.src;
 
-  finalPageSendButton.textContent = 'Отправка ...';
+  // finalPageSendButton.textContent = 'Отправка ...';
 
   // Загрузка изображения в бинарном формате
   const response = await fetch(imageURL);
@@ -158,20 +160,20 @@ async function sendPhoto(assetElement) {
       console.log(data);
       if (data.ok) {
           console.log('Фотография успешно отправлена в Telegram.');
-          finalPageSendButton.textContent = 'Отправлено';
+          // finalPageSendButton.textContent = 'Отправлено';
       } else {
           console.error('Произошла ошибка при отправке фотографии.');
-          finalPageSendButton.textContent = 'Ошибка';
+          // finalPageSendButton.textContent = 'Ошибка';
       }
   } catch (error) {
       console.error('Ошибка:', error);
-      finalPageSendButton.textContent = 'Ошибка';
+      // finalPageSendButton.textContent = 'Ошибка';
   }
 }
 
-finalPageSendButton.addEventListener('click', () => {
-  sendPhoto(finalPageIMG);
-})
+// finalPageSendButton.addEventListener('click', () => {
+//   sendPhoto(finalPageIMG);
+// })
 
 fourthPageButton.addEventListener('click', () => { 
   if (detect.os() === 'iOS') {
@@ -285,6 +287,12 @@ function stopCamera() {
 
 finalPageBackButton.addEventListener('click', () => {
   finalPage.classList.add('final-page_disabled');
-  fourthPage.classList.remove('fourth-page_disabled');
-  finalPageSendButton.textContent = 'Отправить';
+  sendPhoto(finalPageIMG);
+  endPage.classList.remove('end-page_disabled');
+  // finalPageSendButton.textContent = 'Отправить';
 });
+
+endPageButton.addEventListener('click', () => {
+  endPage.classList.add('end-page_disabled');
+  fourthPage.classList.remove('fourth-page_disabled');
+})
