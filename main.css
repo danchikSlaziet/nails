@@ -534,8 +534,8 @@ button:hover {
   position: absolute;
   top: 30px;
   object-fit: cover;
-  width: 279px;
-  height: 286px;
+  width: 270px;
+  aspect-ratio: 328 / 337;
   z-index: 1000;
   display: block;
   pointer-events: none;
