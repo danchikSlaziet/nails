@@ -338,7 +338,7 @@ button:hover {
 
 .fourth-page__video {
   display: none;
-  border: 1px solid #FFF;
+  /* border: 1px solid #FFF; */
   z-index: 998;
   position: absolute;
   height: 100%;
@@ -638,4 +638,31 @@ button:hover {
   font-weight: 500;
   line-height: 24px;
   text-decoration-line: underline;
+}
+
+
+.info-page {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-evenly;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100vh;
+  z-index: 1000;
+  padding: 0 24px;
+  background: linear-gradient(347deg, #FFD4C9 -2.24%, #EDCCD3 16.66%, #BFB8ED 52.9%, #9FAAFF 76.53%, #A1A1FF 103.3%);
+}
+.info-page_disabled {
+  display: none;
+}
+.info-page__text {
+  padding: 25px 13px 49px 26px;
+}
+
+.info-page__button {
 }

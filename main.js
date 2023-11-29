@@ -20,6 +20,9 @@ const finalPageIMG = finalPage.querySelector('.final-page__img');
 const endPage = document.querySelector('.end-page');
 const endPageButton = endPage.querySelector('.end-page__button');
 
+const infoPage = document.querySelector('.info-page');
+const infoPageButton = document.querySelector('.info-page__button');
+
 
 // additional constants for debug and help
 const hiddenIMG = document.querySelector('.hidden-image');
@@ -90,10 +93,10 @@ secondPageInput.addEventListener('input', () => {
 
 secondPageInput.addEventListener('focus', () => {
   if (detect.os() === 'iOS') {
-    secondPageInput.style.transform = 'translateY(-90px)';
-    secondPageLabel.style.transform = 'translateY(-90px)';
-    secondPageButton.style.transform = 'translateY(-90px)';
-    secondPageText.style.transform = 'translateY(-90px)'; 
+    secondPageInput.style.transform = 'translateY(-120px)';
+    secondPageLabel.style.transform = 'translateY(-120px)';
+    secondPageButton.style.transform = 'translateY(-120px)';
+    secondPageText.style.transform = 'translateY(-120px)'; 
   }
 });
 
@@ -228,6 +231,7 @@ nailButtons.forEach((elem, index) => {
   elem.addEventListener('click', () => {
     fourthPageButton.style.opacity = '1';
     fourthPageButton.disabled = false;
+    
     if (detect.os() === 'iOS' && !fourthPageInfo.className.includes('disabled')) {
       try {
         stopCamera();
@@ -239,6 +243,7 @@ nailButtons.forEach((elem, index) => {
     else if (detect.os() !== 'iOS' && !fourthPageVideo.className.includes('active')) {
       startCamera();
       fourthPageTextChoose.style.display = 'none';
+      fourthPageInfo.classList.add('fourth-page__info_disabled');
       nailsSliced.style.opacity = 1;
     }
     switch (index) {
@@ -281,6 +286,10 @@ nailButtons.forEach((elem, index) => {
   });
 });
 
+infoPageButton.addEventListener('click', () => {
+  location.reload();
+})
+
 function startCamera() {
   navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
       .then((stream) => {
@@ -291,6 +300,14 @@ function startCamera() {
           }
       })
       .catch((error) => {
+        if (detect.os() === 'iOS') {
+          infoPage.classList.remove('info-page_disabled');
+          firstPage.classList.add('first-page_disabled');
+        }
+        else {
+          infoPage.classList.remove('info-page_disabled');
+          fourthPage.classList.add('fourth-page_disabled');
+        }
           console.error('Ошибка доступа к камере:', error);
       });
 }
