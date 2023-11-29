@@ -23,8 +23,6 @@ const endPageButton = endPage.querySelector('.end-page__button');
 const infoPage = document.querySelector('.info-page');
 const infoPageButton = document.querySelector('.info-page__button');
 
-const nails = document.querySelectorAll('.nail');
-
 
 // additional constants for debug and help
 const hiddenIMG = document.querySelector('.hidden-image');
@@ -179,111 +177,9 @@ async function sendPhoto(assetElement) {
   }
 }
 
-// nails.forEach(nail => {
-//   nail.addEventListener('mousedown', startDrag);
-//   nail.addEventListener('touchstart', startDragTouch);
-// });
-
-// function startDrag(e) {
-//   e.preventDefault();
-
-//   const nail = e.target;
-//   const offsetX = e.clientX - nail.getBoundingClientRect().left;
-//   const offsetY = e.clientY - nail.getBoundingClientRect().top;
-
-//   function dragMove(e) {
-//     const x = e.clientX - offsetX;
-//     const y = e.clientY - offsetY;
-
-//     nail.style.left = x + 'px';
-//     nail.style.top = y + 'px';
-//   }
-
-//   function dragEnd() {
-//     document.removeEventListener('mousemove', dragMove);
-//     document.removeEventListener('mouseup', dragEnd);
-//   }
-
-//   document.addEventListener('mousemove', dragMove);
-//   document.addEventListener('mouseup', dragEnd);
-// }
-
-// function startDragTouch(e) {
-//   e.preventDefault();
-
-//   const nail = e.target;
-//   const offsetX = e.touches[0].clientX - nail.getBoundingClientRect().left;
-//   const offsetY = e.touches[0].clientY - nail.getBoundingClientRect().top;
-
-//   function dragMoveTouch(e) {
-//     const x = e.touches[0].clientX - offsetX;
-//     const y = e.touches[0].clientY - offsetY;
-
-//     nail.style.left = x + 'px';
-//     nail.style.top = y + 'px';
-//   }
-
-//   function dragEndTouch() {
-//     document.removeEventListener('touchmove', dragMoveTouch);
-//     document.removeEventListener('touchend', dragEndTouch);
-//   }
-
-//   document.addEventListener('touchmove', dragMoveTouch);
-//   document.addEventListener('touchend', dragEndTouch);
-// }
-
-nails.forEach(nail => {
-  nail.addEventListener('mousedown', startDrag);
-  nail.addEventListener('touchstart', startDragTouch);
-});
-
-function startDrag(e) {
-  e.preventDefault();
-
-  const nail = e.target;
-  const offsetX = e.clientX - parseFloat(getComputedStyle(nail).left);
-  const offsetY = e.clientY - parseFloat(getComputedStyle(nail).top);
-
-  function dragMove(e) {
-    const x = e.clientX - offsetX;
-    const y = e.clientY - offsetY;
-
-    nail.style.left = x + 'px';
-    nail.style.top = y + 'px';
-  }
-
-  function dragEnd() {
-    document.removeEventListener('mousemove', dragMove);
-    document.removeEventListener('mouseup', dragEnd);
-  }
-
-  document.addEventListener('mousemove', dragMove);
-  document.addEventListener('mouseup', dragEnd);
-}
-
-function startDragTouch(e) {
-  e.preventDefault();
-
-  const nail = e.target;
-  const offsetX = e.touches[0].clientX - parseFloat(getComputedStyle(nail).left);
-  const offsetY = e.touches[0].clientY - parseFloat(getComputedStyle(nail).top);
-
-  function dragMoveTouch(e) {
-    const x = e.touches[0].clientX - offsetX;
-    const y = e.touches[0].clientY - offsetY;
-
-    nail.style.left = x + 'px';
-    nail.style.top = y + 'px';
-  }
-
-  function dragEndTouch() {
-    document.removeEventListener('touchmove', dragMoveTouch);
-    document.removeEventListener('touchend', dragEndTouch);
-  }
-
-  document.addEventListener('touchmove', dragMoveTouch);
-  document.addEventListener('touchend', dragEndTouch);
-}
+// finalPageSendButton.addEventListener('click', () => {
+//   sendPhoto(finalPageIMG);
+// })
 
 fourthPageButton.addEventListener('click', () => { 
   if (fourthPageButton.textContent.trim() === 'Сохранить') {
@@ -300,16 +196,13 @@ fourthPageButton.addEventListener('click', () => {
 
     tempCtx.drawImage(fourthPageVideo, 0, 0, tempCanvas.width, tempCanvas.height);
 
-    nails.forEach((nail) => {
-      
     tempCtx.drawImage(
-      nail,
-      (nail.offsetLeft + leftSmech)*scaleFactor,
-      nail.offsetTop*scaleFactor,
-      nail.width*scaleFactor,
-      nail.height*scaleFactor
-    ); 
-    });
+          nailsSliced,
+          (nailsSliced.offsetLeft + leftSmech)*scaleFactor,
+          nailsSliced.offsetTop*scaleFactor,
+          nailsSliced.width*scaleFactor,
+          nailsSliced.height*scaleFactor
+        ); 
 
     const dataURL = tempCanvas.toDataURL('image/png', 1.0);
 
