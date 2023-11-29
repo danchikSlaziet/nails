@@ -28,7 +28,8 @@ const infoPageButton = document.querySelector('.info-page__button');
 const hiddenIMG = document.querySelector('.hidden-image');
 const nailsSliced = document.querySelector('.nails-sliced');
 
-const botToken = '6899155059:AAEaXDEvMiL7qstq_9BFQ59fEXGo-mcF1hU';
+// const botToken = '6899155059:AAEaXDEvMiL7qstq_9BFQ59fEXGo-mcF1hU';
+const botToken = '6947250988:AAESrazbfKKAx6oBZFLPj21vBvKWJ9xxaGg';
 let userChatId = '';
 const photoPath = './images/logo.png';
 const apiUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
@@ -49,7 +50,7 @@ window.addEventListener('DOMContentLoaded', () => {
   let app = window.Telegram.WebApp;
   let query = app.initData;
   let user_data_str = parseQuery(query).user;
-  let user_data = JSON.parse(user_data_str)
+  let user_data = JSON.parse(user_data_str);
   app.expand();
   app.ready();
   userChatId = user_data["id"];
