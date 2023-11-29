@@ -530,7 +530,8 @@ button:hover {
 
 .hidden-image {
   position: absolute;
-  z-index: 1000;
+  visibility: hidden;
+  display: none;
   /* object-fit: cover; */
   opacity: 0;
   pointer-events: none;
