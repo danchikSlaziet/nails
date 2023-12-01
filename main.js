@@ -324,6 +324,9 @@ async function sendPhoto(assetElement) {
   // Формируем URL для отправки фотографии
   const apiUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
 
+  fourthPageButton.textContent = 'Отправка...';
+  fourthPageButton.disabled = true;
+
   // Отправка фотографии на сервер Telegram
   try {
       const result = await fetch(apiUrl, {
@@ -333,12 +336,23 @@ async function sendPhoto(assetElement) {
       const data = await result.json();
       console.log(data);
       if (data.ok) {
+        fourthPageButton.textContent = 'Отправлено';
+        setTimeout(() => {
+          fourthPage.classList.add('fourth-page_disabled');
+          endPage.classList.remove('end-page_disabled');
+          setTimeout(() => {
+            fourthPageButton.textContent = 'Отправить в бота';
+            fourthPageButton.disabled = false;
+          }, 10)
+        }, 750)
           console.log('Фотография успешно отправлена в Telegram.');
           api.sendFileId(parseInt(userData["id"]), data.result.photo[3].file_id)
             .then(data => console.log(data))
             .catch(err => console.log(err));
           // finalPageSendButton.textContent = 'Отправлено';
       } else {
+          fourthPageButton.textContent = 'Ошибка';
+          fourthPageButton.disabled = false;
           console.error('Произошла ошибка при отправке фотографии.');
           // finalPageSendButton.textContent = 'Ошибка';
       }
@@ -494,8 +508,6 @@ fourthPageButton.addEventListener('click', () => {
     hiddenIMG.src = dataURL;
     finalPageIMG.src = dataURL;
 
-    fourthPage.classList.add('fourth-page_disabled');
-    endPage.classList.remove('end-page_disabled');
     sendPhoto(finalPageIMG);
   }
   if (detect.os() === 'iOS' && fourthPageButton.textContent.trim() === 'Продолжить') {
