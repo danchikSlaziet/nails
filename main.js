@@ -341,7 +341,7 @@ async function sendPhoto(assetElement) {
           fourthPage.classList.add('fourth-page_disabled');
           endPage.classList.remove('end-page_disabled');
           setTimeout(() => {
-            fourthPageButton.textContent = 'Отправить в бота';
+            fourthPageButton.textContent = 'Сохранить';
             fourthPageButton.disabled = false;
           }, 10)
         }, 750)
@@ -353,6 +353,9 @@ async function sendPhoto(assetElement) {
       } else {
           fourthPageButton.textContent = 'Ошибка';
           fourthPageButton.disabled = false;
+          setTimeout(() => {
+            fourthPageButton.textContent = 'Сохранить';
+          }, 1000)
           console.error('Произошла ошибка при отправке фотографии.');
           // finalPageSendButton.textContent = 'Ошибка';
       }
