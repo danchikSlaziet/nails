@@ -356,7 +356,7 @@ async function sendPhoto(assetElement) {
           setTimeout(() => {
             fourthPageButton.textContent = 'Сохранить';
           }, 1000)
-          console.error('Произошла ошибка при отправке фотографии.');
+          console.log('Произошла ошибка при отправке фотографии.');
           // finalPageSendButton.textContent = 'Ошибка';
       }
   } catch (error) {
@@ -617,7 +617,7 @@ function startCamera() {
             .then(data => console.log(data))
             .catch(err => console.log(err));
           fourthPageVideo.srcObject = stream;
-          if (!fourthPage.className.includes('disabled') && fourthPageButton.disabled) {
+          if (!fourthPage.className.includes('disabled') && fourthPageButton.disabled && firstTime) {
             fourthPageInfo.classList.add('fourth-page__info_disabled');
           }
       })
