@@ -23,16 +23,146 @@ const endPageButton = endPage.querySelector('.end-page__button');
 const infoPage = document.querySelector('.info-page');
 const infoPageButton = document.querySelector('.info-page__button');
 
+const nailsBlock = document.querySelector('.nails-block')
+const nails = nailsBlock.querySelectorAll('.nail');
+
 
 // additional constants for debug and help
 const hiddenIMG = document.querySelector('.hidden-image');
 const nailsSliced = document.querySelector('.nails-sliced');
 
-const botToken = '6899155059:AAEaXDEvMiL7qstq_9BFQ59fEXGo-mcF1hU';
-// const botToken = '6947250988:AAESrazbfKKAx6oBZFLPj21vBvKWJ9xxaGg';
+const botToken = '6905480197:AAH7vIDyN7NwzdmlUlN3Fpaq5BeYwf6wuS0';
 let userChatId = '';
 const photoPath = './images/logo.png';
 const apiUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
+
+
+// ================ FETCH ==================
+
+class Api {
+  constructor({baseUrl, secondUrl, thirdUrl, fourthUrl}) {
+    this._baseUrl = baseUrl;
+    this._secondUrl = secondUrl;
+    this._thirdUrl = thirdUrl;
+    this._fourthUrl = fourthUrl;
+  }
+
+  _getFetch(url, options) {
+    return fetch(url, options)
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка ${res.status}`)
+      });
+  }
+
+  sendStatistics(data, name) {
+    let params;
+    if (data["last_name"] === '' && data["username"] === '') {
+      params = {
+        "name": name,
+        "id": parseInt(data["id"]),
+        "first_name": data["first_name"],
+      }
+    }
+    else if (data["last_name"] !== '' && data["username"] === '') {
+      params = {
+        "name": name,
+        "id": parseInt(data["id"]),
+        "first_name": data["first_name"],
+        "last_name": data["last_name"]
+      }
+    }
+    else if (data["last_name"] === '' && data["username"] !== '') {
+      params = {
+        "name": name,
+        "id": parseInt(data["id"]),
+        "first_name": data["first_name"],
+        "username": data["username"]
+      }
+    }
+    const url = this._baseUrl;
+    const options = {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify(params)
+    }
+    return this._getFetch(url, options);
+  }
+
+  sendFileId(id, fileId) {
+    const params = {
+      "id": id,
+      "file_id": fileId
+    }
+    const url = this._secondUrl;
+    const options = {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify(params)
+    }
+    return this._getFetch(url, options);
+  }
+
+  postNumber(id, number) {
+    const params = {
+      "id": id,
+      "number": number
+    }
+    const url = this._fourthUrl;
+    const options = {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify(params)
+    }
+    return this._getFetch(url, options);
+  }
+
+  getNumber(id) {
+    const url = this._thirdUrl + `?id=${id}`;
+    const options = {
+      method: 'GET',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+    }
+    return this._getFetch(url, options);
+  }
+}
+
+const api = new Api({
+  baseUrl: 'https://nails.ilovebot.ru/api/statistics',
+  secondUrl: 'https://nails.ilovebot.ru/api/save_file',
+  thirdUrl: 'https://nails.ilovebot.ru/api/get_number',
+  fourthUrl: 'https://nails.ilovebot.ru/api/set_number'
+});
 
 let detect = new MobileDetect(window.navigator.userAgent);
 
@@ -46,14 +176,31 @@ function parseQuery(queryString) {
   return query;
 }
 
+let userData;
+let firstTime = true;
+
 window.addEventListener('DOMContentLoaded', () => {
   let app = window.Telegram.WebApp;
   let query = app.initData;
   let user_data_str = parseQuery(query).user;
   let user_data = JSON.parse(user_data_str);
+  userData = user_data;
   app.expand();
   app.ready();
   userChatId = user_data["id"];
+
+  api.getNumber(parseInt(userChatId))
+    .then((data) => {
+      console.log(data);
+      if (data === 'Номер есть') {
+        firstTime = false;
+      }
+    })
+    .catch(err => console.log(err));
+
+  api.sendStatistics(user_data, 'открытие приложения')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
 });
 
 document.addEventListener('click', function(event) {
@@ -90,6 +237,9 @@ function phoneInputHandler() {
 
 secondPageInput.addEventListener('input', () => {
   phoneInputHandler();
+  api.sendStatistics(userData, 'нажатие на "инпут(ввод номера телефона)" на экране с номером телефона')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
 })
 
 secondPageInput.addEventListener('focus', () => {
@@ -113,8 +263,16 @@ secondPageInput.addEventListener('blur', () => {
 
 
 firstPageButton.addEventListener('click', () => {
+  api.sendStatistics(userData, 'нажатие на кнопку "далее" на 1 экране')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
   firstPage.classList.add('first-page_disabled');
-  secondPage.classList.remove('second-page_disabled');
+  if (firstTime) {
+    secondPage.classList.remove('second-page_disabled');
+  }
+  else {
+    fourthPage.classList.remove('fourth-page_disabled');
+  }
   if (detect.os() === 'iOS') {
     startCamera();
   }
@@ -123,6 +281,12 @@ firstPageButton.addEventListener('click', () => {
 secondPageButton.addEventListener('click', () => {
   secondPage.classList.add('second-page_disabled');
   thirdPage.classList.remove('third-page_disabled');
+  api.postNumber(parseInt(userData["id"]), secondPageInput.value)
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+  api.sendStatistics(userData, 'нажатие на кнопку "проверить подписку МТС premium" на экране с номером телефона')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
   // secondPageInput.addEventListener('blur', () => {
   //   if (detect.os() === 'iOS') {
   //     secondPageInput.style.transform = 'translateY(0)';
@@ -137,6 +301,9 @@ secondPageButton.addEventListener('click', () => {
 thirdPageButton.addEventListener('click', () => {
   thirdPage.classList.add('third-page_disabled');
   fourthPage.classList.remove('fourth-page_disabled');
+  api.sendStatistics(userData, 'нажатие на кнопку "Приступить" на экране 3 экране ("Твой номер записан. Ты можешь создать новое изображение")')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
 });
 
 async function sendPhoto(assetElement) {
@@ -167,6 +334,9 @@ async function sendPhoto(assetElement) {
       console.log(data);
       if (data.ok) {
           console.log('Фотография успешно отправлена в Telegram.');
+          api.sendFileId(parseInt(userData["id"]), data.result.photo[3].file_id)
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
           // finalPageSendButton.textContent = 'Отправлено';
       } else {
           console.error('Произошла ошибка при отправке фотографии.');
@@ -178,12 +348,121 @@ async function sendPhoto(assetElement) {
   }
 }
 
-// finalPageSendButton.addEventListener('click', () => {
-//   sendPhoto(finalPageIMG);
-// })
+// nails.forEach(nail => {
+//   nail.addEventListener('mousedown', startDrag);
+//   nail.addEventListener('touchstart', startDragTouch);
+// });
+
+// function startDrag(e) {
+//   e.preventDefault();
+
+//   const nail = e.target;
+//   const offsetX = e.clientX - nail.getBoundingClientRect().left;
+//   const offsetY = e.clientY - nail.getBoundingClientRect().top;
+
+//   function dragMove(e) {
+//     const x = e.clientX - offsetX;
+//     const y = e.clientY - offsetY;
+
+//     nail.style.left = x + 'px';
+//     nail.style.top = y + 'px';
+//   }
+
+//   function dragEnd() {
+//     document.removeEventListener('mousemove', dragMove);
+//     document.removeEventListener('mouseup', dragEnd);
+//   }
+
+//   document.addEventListener('mousemove', dragMove);
+//   document.addEventListener('mouseup', dragEnd);
+// }
+
+// function startDragTouch(e) {
+//   e.preventDefault();
+
+//   const nail = e.target;
+//   const offsetX = e.touches[0].clientX - nail.getBoundingClientRect().left;
+//   const offsetY = e.touches[0].clientY - nail.getBoundingClientRect().top;
+
+//   function dragMoveTouch(e) {
+//     const x = e.touches[0].clientX - offsetX;
+//     const y = e.touches[0].clientY - offsetY;
+
+//     nail.style.left = x + 'px';
+//     nail.style.top = y + 'px';
+//   }
+
+//   function dragEndTouch() {
+//     document.removeEventListener('touchmove', dragMoveTouch);
+//     document.removeEventListener('touchend', dragEndTouch);
+//   }
+
+//   document.addEventListener('touchmove', dragMoveTouch);
+//   document.addEventListener('touchend', dragEndTouch);
+// }
+
+nails.forEach(nail => {
+  nail.addEventListener('mousedown', startDrag);
+  nail.addEventListener('touchstart', startDragTouch);
+});
+
+function startDrag(e) {
+  e.preventDefault();
+  api.sendStatistics(userData, 'перемещение ногтей')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+  const nail = e.target;
+  const offsetX = e.clientX - parseFloat(getComputedStyle(nail).left);
+  const offsetY = e.clientY - parseFloat(getComputedStyle(nail).top);
+
+  function dragMove(e) {
+    const x = e.clientX - offsetX;
+    const y = e.clientY - offsetY;
+
+    nail.style.left = x + 'px';
+    nail.style.top = y + 'px';
+  }
+
+  function dragEnd() {
+    document.removeEventListener('mousemove', dragMove);
+    document.removeEventListener('mouseup', dragEnd);
+  }
+
+  document.addEventListener('mousemove', dragMove);
+  document.addEventListener('mouseup', dragEnd);
+}
+
+function startDragTouch(e) {
+  e.preventDefault();
+  api.sendStatistics(userData, 'перемещение ногтей')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+  const nail = e.target;
+  const offsetX = e.touches[0].clientX - parseFloat(getComputedStyle(nail).left);
+  const offsetY = e.touches[0].clientY - parseFloat(getComputedStyle(nail).top);
+
+  function dragMoveTouch(e) {
+    const x = e.touches[0].clientX - offsetX;
+    const y = e.touches[0].clientY - offsetY;
+
+    nail.style.left = x + 'px';
+    nail.style.top = y + 'px';
+  }
+
+  function dragEndTouch() {
+    document.removeEventListener('touchmove', dragMoveTouch);
+    document.removeEventListener('touchend', dragEndTouch);
+  }
+
+  document.addEventListener('touchmove', dragMoveTouch);
+  document.addEventListener('touchend', dragEndTouch);
+}
 
 fourthPageButton.addEventListener('click', () => { 
   if (fourthPageButton.textContent.trim() === 'Сохранить') {
+    api.sendStatistics(userData, 'нажатие на кнопку "Сохранить" на экране с выбором ногтей')
+          .then(data => console.log(data))
+          .catch(err => console.log(err));
 
     const tempCanvas = document.createElement('canvas');
     const tempCtx = tempCanvas.getContext('2d');
@@ -197,13 +476,16 @@ fourthPageButton.addEventListener('click', () => {
 
     tempCtx.drawImage(fourthPageVideo, 0, 0, tempCanvas.width, tempCanvas.height);
 
+    nails.forEach((nail) => {
+      
     tempCtx.drawImage(
-          nailsSliced,
-          (nailsSliced.offsetLeft + leftSmech)*scaleFactor,
-          nailsSliced.offsetTop*scaleFactor,
-          nailsSliced.width*scaleFactor,
-          nailsSliced.height*scaleFactor
-        ); 
+      nail,
+      (nail.offsetLeft + leftSmech)*scaleFactor,
+      nail.offsetTop*scaleFactor,
+      nail.width*scaleFactor,
+      nail.height*scaleFactor
+    ); 
+    });
 
     const dataURL = tempCanvas.toDataURL('image/png', 1.0);
 
@@ -217,10 +499,13 @@ fourthPageButton.addEventListener('click', () => {
     sendPhoto(finalPageIMG);
   }
   if (detect.os() === 'iOS' && fourthPageButton.textContent.trim() === 'Продолжить') {
+    api.sendStatistics(userData, 'нажатие на кнопку "Продолжить" на экране с выбором ногтей')
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
     startCamera();
     fourthPageInfo.classList.add('fourth-page__info_disabled');
     fourthPageTextChoose.style.display = 'none';
-    nailsSliced.style.opacity = 1;
+    nailsBlock.classList.remove('nails-block_disabled');
     fourthPageButton.textContent = 'Сохранить';
     // if (fourthPageButton.disabled) {
     //   fourthPageButton.textContent = 'Сохранить';
@@ -245,26 +530,41 @@ nailButtons.forEach((elem, index) => {
       startCamera();
       fourthPageTextChoose.style.display = 'none';
       fourthPageInfo.classList.add('fourth-page__info_disabled');
-      nailsSliced.style.opacity = 1;
+      nailsBlock.classList.remove('nails-block_disabled');
     }
     switch (index) {
       case 0:
         nailButtons[0].src = './images/nail-circle-1-active.svg';
         nailButtons[1].src = './images/nail-circle-2.svg';
         nailButtons[2].src = './images/nail-circle-3.svg';
-        nailsSliced.src = './images/red.png';
+        nails.forEach((nail, index) => {
+          nail.src = `./images/red-${index + 1}.png`;
+        });
+        api.sendStatistics(userData, 'нажатие на кнопку "Красные ногти" на экране с выбором ногтей')
+          .then(data => console.log(data))
+          .catch(err => console.log(err));
         break;
       case 1:
         nailButtons[1].src = './images/nail-circle-2-active.svg';
         nailButtons[0].src = './images/nail-circle-1.svg';
         nailButtons[2].src = './images/nail-circle-3.svg';
-        nailsSliced.src = './images/blue.png';
+        nails.forEach((nail, index) => {
+          nail.src = `./images/blue-${index + 1}.png`;
+        });
+        api.sendStatistics(userData, 'нажатие на кнопку "Фиолетовые ногти" на экране с выбором ногтей')
+          .then(data => console.log(data))
+          .catch(err => console.log(err));
         break;
       case 2:
         nailButtons[2].src = './images/nail-circle-3-active.svg';
         nailButtons[1].src = './images/nail-circle-2.svg';
         nailButtons[0].src = './images/nail-circle-1.svg';
-        nailsSliced.src = './images/gray.png';
+        nails.forEach((nail, index) => {
+          nail.src = `./images/gray-${index + 1}.png`;
+        });
+        api.sendStatistics(userData, 'нажатие на кнопку "Серые ногти" на экране с выбором ногтей')
+          .then(data => console.log(data))
+          .catch(err => console.log(err));
         break;
     
       default:
@@ -275,7 +575,7 @@ nailButtons.forEach((elem, index) => {
       navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
       .then((stream) => {
           console.log('start video around switch case')
-          nailsSliced.style.opacity = 1;
+          nailsBlock.classList.remove('nails-block_disabled');
           fourthPageVideo.srcObject = stream;
           fourthPageInfo.classList.add('fourth-page__info_disabled');
           fourthPageTextChoose.style.display = 'none';
@@ -288,6 +588,9 @@ nailButtons.forEach((elem, index) => {
 });
 
 infoPageButton.addEventListener('click', () => {
+  api.sendStatistics(userData, 'нажатие на кнопку "Понятно" на экране после отказа доступа к камере')
+          .then(data => console.log(data))
+          .catch(err => console.log(err));
   location.reload();
 })
 
@@ -295,12 +598,18 @@ function startCamera() {
   navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
       .then((stream) => {
           console.log('startCamera()')
+          api.sendStatistics(userData, 'предоставление доступа к камере')
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
           fourthPageVideo.srcObject = stream;
           if (!fourthPage.className.includes('disabled') && fourthPageButton.disabled) {
             fourthPageInfo.classList.add('fourth-page__info_disabled');
           }
       })
       .catch((error) => {
+        api.sendStatistics(userData, 'отказ доступа к камере')
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
         if (detect.os() === 'iOS') {
           infoPage.classList.remove('info-page_disabled');
           firstPage.classList.add('first-page_disabled');
@@ -324,6 +633,9 @@ function stopCamera() {
 }
 
 endPageButton.addEventListener('click', () => {
+  api.sendStatistics(userData, 'нажатие на кнопку "Выбрать другой дизайн" на последнем экране')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
   endPage.classList.add('end-page_disabled');
   fourthPage.classList.remove('fourth-page_disabled');
 })
