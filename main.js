@@ -68,7 +68,6 @@ function startEraseGame() {
       isAllLayersErased = true;
       fourthPage.classList.add('fourth-page_disabled');
       endPage.classList.remove('end-page_disabled');
-      endPage.querySelector('.end-page__text').textContent = 'Поздравляем! Ты успешно справился с заданием! Теперь ты в конкурсе!';
     }
   }
   function move4(e, percent) {
@@ -348,6 +347,7 @@ function parseQuery(queryString) {
 
 let userData;
 let firstTime = true;
+let appGlobal;
 
 window.addEventListener('DOMContentLoaded', () => {
   let app = window.Telegram.WebApp;
@@ -355,6 +355,7 @@ window.addEventListener('DOMContentLoaded', () => {
   let user_data_str = parseQuery(query).user;
   let user_data = JSON.parse(user_data_str);
   userData = user_data;
+  appGlobal = app;
   app.expand();
   app.ready();
   userChatId = user_data["id"];
@@ -552,11 +553,7 @@ finalPageLoseButton.addEventListener('click', () => {
   restartEraseGame();
 })
 finalPageButton.addEventListener('click', () => {
-  finalPage.classList.add('final-page_disabled');
-  fourthPage.classList.remove('fourth-page_disabled');
-  timerInstance.reset();
-  restartEraseGame();
-  isAllLayersErased = false;
+  appGlobal.close();
 })
 
 finalPageBack.addEventListener('click', () => {
