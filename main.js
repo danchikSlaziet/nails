@@ -419,6 +419,7 @@ endPageInput.addEventListener('focus', () => {
     endPageButton.style.transform = 'translateY(-120px)';
     endPageText.style.transform = 'translateY(-120px)';
     endPageTopText.style.transform = 'translateY(-120px)';
+    endPageCheckContainer.style.transform = 'translateY(-120px)';
   }
 });
 
@@ -429,6 +430,7 @@ endPageInput.addEventListener('blur', () => {
     endPageText.style.transform = 'translateY(0)';
     endPageButton.style.transform = 'translateY(0)';
     endPageTopText.style.transform = 'translateY(0)';
+    endPageCheckContainer.style.transform = 'translateY(0)';
     window.scrollTo({top: 0, behavior: "smooth"});
   }
 });
