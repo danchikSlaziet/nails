@@ -68,6 +68,7 @@ function startEraseGame() {
       isAllLayersErased = true;
       fourthPage.classList.add('fourth-page_disabled');
       endPage.classList.remove('end-page_disabled');
+      console.log('end page disabled in move5 func')
     }
   }
   function move4(e, percent) {
@@ -118,7 +119,6 @@ function startEraseGame() {
       setTimeout(() => {
         fourthPageScreen.classList.remove('fourth-page__screen_active');
       }, 800)
-      console.log('end')
       this.clear();
       this.enable = false;
       $('#elem2').wScratchPad('clear');
@@ -134,7 +134,6 @@ function startEraseGame() {
     }
   }
   function move(e, percent) {
-    console.log(percent)
     if (percent > 99.8) {
       console.log('end');
       fourthPageScreen.classList.add('fourth-page__screen_active');
@@ -551,14 +550,23 @@ finalPageLoseButton.addEventListener('click', () => {
   fourthPage.classList.remove('fourth-page_disabled');
   timerInstance.reset();
   restartEraseGame();
+  api.sendStatistics(userData, 'нажатие на кнопку "Попробовать ещё" на экране с текстом "К сожалению, ты не успел стереть все слои маникюра :("')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
 })
 finalPageButton.addEventListener('click', () => {
+  api.sendStatistics(userData, 'нажатие на кнопку "Готово" на экране с текстом "твой номер записан"')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
   appGlobal.close();
 })
 
 finalPageBack.addEventListener('click', () => {
   endPage.classList.remove('end-page_disabled');
   finalPage.classList.add('final-page_disabled');
+  api.sendStatistics(userData, 'нажатие на кнопку "Назад" на экране с текстом "твой номер записан"')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
 })
 
 endPageButton.addEventListener('click', () => { 
