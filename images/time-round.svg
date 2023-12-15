@@ -1,0 +1,9 @@
+<svg width="81" height="80" viewBox="0 0 81 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M40.7827 -1.74846e-06C62.8741 -2.7141e-06 80.7827 17.9086 80.7827 40C80.7827 62.0914 62.8741 80 40.7827 80C18.6913 80 0.782714 62.0914 0.782713 40C0.782712 17.9086 18.6913 -7.8281e-07 40.7827 -1.74846e-06ZM40.7827 73.6C59.3395 73.6 74.3827 58.5568 74.3827 40C74.3827 21.4432 59.3395 6.4 40.7827 6.4C22.2259 6.4 7.18271 21.4432 7.18271 40C7.18272 58.5568 22.2259 73.6 40.7827 73.6Z" fill="url(#paint0_radial_507_2)"/>
+<defs>
+<radialGradient id="paint0_radial_507_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11.7827 -34) rotate(42.7688) scale(108.977)">
+<stop stop-color="#FF0032"/>
+<stop offset="1" stop-color="white"/>
+</radialGradient>
+</defs>
+</svg>

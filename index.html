@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
   <title>NAILS</title>
   <link rel="stylesheet" href="./main.css">
   <script defer src="mobile-detect.min.js"></script>
@@ -11,41 +11,46 @@
 </head>
 <body>
   <div class="first-page">
-    <p class="first-page__text text">
-      Краткая инструкция!
-      <br><br>
-      Для принятия участия в&nbsp;розыгрыше 
-      и&nbsp;получения приза нужно выполнить следующие пункты: 
-      <br><br>
-      &mdash;&nbsp;ввести номер телефона для&nbsp;проверки подписки МТС Premium<br>
-      &mdash;&nbsp;сделать фото<br>
-      с&nbsp;примеркой маника 
-      и&nbsp;поделиться им 
-      в&nbsp;комментариях 
-      под&nbsp;конкурсным постом<br>
-      &mdash;&nbsp;проверить активированный 
-      МТС Premium<br>
-      &mdash;&nbsp;ждать результатов конкурса💜
-    </p>
-    <button class="first-page__button button">
-      Далее
-    </button>
+    <img class="first-page__button" src="./images/first-page-btn.png" alt="">
   </div>
   <div class="second-page second-page_disabled">
-    <p class="second-page__text text">
-      Чтобы участвововать в&nbsp;конкурсе от&nbsp;МТС,
-      оставь свой номер
-      для&nbsp;проверки подписки
-      МТС Premium
+    <img class="back-btn second-page__back" src="./images/back-btn.svg" alt="">
+    <p class="second-page__top-text">
+      обнови<br>маник
     </p>
-    <p class="second-page__label">
-      Оставь свой номер для участия в конкурсе
+    <div class="second-page__content blur-content">
+      <img class="blur-content__img" src="./images/content-img-1.png" alt="">
+      <p class="blur-content__text">
+        Стирай слой за&nbsp;слоем маникюр
+      </p>
+    </div>
+    <img class="second-page__button" src="./images/second-page-btn.png" alt="">
+  </div>
+  <div class="second-page-2 second-page-2_disabled">
+    <img class="back-btn second-page-2__back" src="./images/back-btn.svg" alt="">
+    <p class="second-page-2__top-text">
+      обнови<br>маник
     </p>
-    <input class="second-page__input" type="tel" value="+7" name="phone number">
-    <button disabled class="second-page__button">
-      Проверить подписку МТС Premium
-      <img class="second-page__right-arrow" src="./images/right-arrow.svg" alt="right arrow">
-    </button>
+    <div class="second-page-2__content blur-content">
+      <img class="blur-content__img" src="./images/content-img-2.png" alt="">
+      <p class="blur-content__text">
+        Успеть стереть 5&nbsp;слоев за&nbsp;30&nbsp;секунд
+      </p>
+    </div>
+    <img class="second-page-2__button" src="./images/second-page-btn.png" alt="">
+  </div>
+  <div class="second-page-3 second-page-3_disabled">
+    <img class="back-btn second-page-3__back" src="./images/back-btn.svg" alt="">
+    <p class="second-page-3__top-text">
+      обнови<br>маник
+    </p>
+    <div class="second-page-3__content blur-content">
+      <img class="blur-content__img" src="./images/content-img-3.png" alt="">
+      <p class="blur-content__text">
+        Введи номер телефона для проверки подписки МТС Premium
+      </p>
+    </div>
+    <img class="second-page-3__button" src="./images/second-page-lastbtn.png" alt="">
   </div>
   <div class="third-page third-page_disabled">
     <img class="third-page__check-mark" src="./images/third-page-V.svg" alt="check mark">
@@ -59,47 +64,26 @@
   </div>
   <div class="fourth-page fourth-page_disabled">
     <div class="fourth-page__screen">
-      <div class="fourth-page__info">
-        <img class="fourth-page__icon" src="./images/fourth-page-icon.svg" alt="">
-        <p class="fourth-page__text fourth-page__text_info">
-          Помести руку в&nbsp;область на&nbsp;экране,
-          чтобы примерить наш маникюр
-        </p>
+      <p class="fourth-page__screen-text">
+        Стирай маникюр пока<br>время не остановилось 
+      </p>
+      <div class="fourth-page__screen-time-block">
+        <img class="fourth-page__screen-round" src="./images/time-round.svg" alt="">
+        <p id="basicUsage" class="fourth-page__screen-time-seconds">30</p>
+        <p class="fourth-page__screen-time-sec">sec</p>
       </div>
-      <div class="fourth-page__nails-bar">
-        <p class="fourth-page__text fourth-page__text_choose">
-          Выбери маникюр
-        </p>
-        <img class="fourth-page__circle" src="./images/nail-circle-1.svg" alt="">
-        <img class="fourth-page__circle" src="./images/nail-circle-2.svg" alt="">
-        <img class="fourth-page__circle" src="./images/nail-circle-3.svg" alt="">
-      </div>
-      <video class="fourth-page__video" playsinline="" autoplay muted></video>
-      <!-- <div class="fourth-page__nails-wrapper">
-        <img class="fourth-page__nail fourth-page__nail_first" src="./images/red-1.png" alt="nail">
-        <img class="fourth-page__nail fourth-page__nail_second" src="./images/red-2.png" alt="nail">
-        <img class="fourth-page__nail fourth-page__nail_third" src="./images/red-3.png" alt="nail">
-        <img class="fourth-page__nail fourth-page__nail_fourth" src="./images/red-4.png" alt="nail">
-        <img class="fourth-page__nail fourth-page__nail_fifth" src="./images/red-5.png" alt="nail">
-      </div> -->
-      <!-- <img class="fourth-page__nail fourth-page__nail_first" src="./images/red-1.png" alt="nail">
-      <img class="fourth-page__nail fourth-page__nail_second" src="./images/red-2.png" alt="nail">
-      <img class="fourth-page__nail fourth-page__nail_third" src="./images/red-3.png" alt="nail">
-      <img class="fourth-page__nail fourth-page__nail_fourth" src="./images/red-4.png" alt="nail">
-      <img class="fourth-page__nail fourth-page__nail_fifth" src="./images/red-5.png" alt="nail"> -->
-      <img class="nails-sliced" src="" alt="">
-      <div class="nails-block nails-block_disabled">
-        <img class="nail nail-1" src="./images/red-1.png" alt="">
-        <img class="nail nail-2" src="./images/red-2.png" alt="">
-        <img class="nail nail-3" src="./images/red-3.png" alt="">
-        <img class="nail nail-4" src="./images/red-4.png" alt="">
-        <img class="nail nail-5" src="./images/red-5.png" alt="">
-      </div>
-      <img class="hidden-image" src="" alt="">
+        <div id="elem">
+        </div>
+        <div id="elem2">
+        </div>
+        <div id="elem3">
+        </div>
+        <div id="elem4">
+        </div>
+        <div id="elem5">
+        </div>
+        <img id="hand" src="./images/hand.png" alt="">
     </div>
-    <button disabled="true" class="fourth-page__button button">
-      Сохранить
-    </button>
   </div>
   <div class="info-page info-page_disabled">
     <p class="info-page__text text">
@@ -110,47 +94,69 @@
     </button>
   </div>
   <div class="final-page final-page_disabled">
-    <p class="final-page__text text">
-      Чтобы участвововать в конкурсе от МТС,
-      оставь свой номер
-      для проверки подписки
-      МТС Premium
+    <p class="final-page__top-text">
+      обнови<br>маник
     </p>
-    <img class="final-page__img" src="" alt="hand with nails">
-    <img class="final-page__stars" src="./images/final-page-img.svg" alt="">
-    <button class="button final-page__back-button">
-      Создать еще
-    </button>
+    <img class="back-btn final-page__back" src="./images/back-btn.svg" alt="">
+    <img class="final-page__img" src="./images/first-help-4.png" alt="">
+    <p class="final-page__text">
+      Твой номер записан!
+      Поздравляем, ты&nbsp;участвуешь в&nbsp;розыгрыше ✨
+    </p>
+    <img class="final-page__check" src="./images/check-arrow.svg" alt="">
+    <img class="final-page__button" src="./images/final-page-btn.png" alt="">
+  </div>
+  <div class="final-page-lose final-page-lose_disabled">
+    <p class="final-page-lose__top-text">
+      обнови<br>маник
+    </p>
+    <img class="final-page-lose__img" src="./images/first-help-3.png" alt="">
+    <p class="final-page-lose__text">
+      К&nbsp;сожалению, ты&nbsp;не&nbsp;успел стереть все слои маникюра :&nbsp;(
+    </p>
+    <img class="final-page-lose__check" src="./images/check-lose.svg" alt="">
+    <img class="final-page-lose__button" src="./images/page-lose-btn.png" alt="">
   </div>
   <div class="end-page end-page_disabled">
-    <p class="end-page__text">
-      <span class="end-page__text_big">Ура, вот что получилось!</span><br><br>
-      Бот пришлет тебе результат в&nbsp;личные сообщения.<br><br>
-      Сохраняй, делись с&nbsp;друзьями и&nbsp;отправляй в&nbsp;комментарии к&nbsp;посту у&nbsp;наших друзей на&nbsp;канале TRUE.MEL и/или в&nbsp;комментарии к&nbsp;посту блогера, у&nbsp;которого ты&nbsp;увидел анонс.<br><br>
-      Не&nbsp;забудь, что для участия в&nbsp;конкурсе необходимо иметь активную подписку <span class="end-page__text_bold">МТС Premium</span>, которую можно <a class="end-page__link" href="https://premiumoffer1.mts.ru/" target="_blank">подключить тут</a><br><br>
-      Если все шаги выполнены - готово! Желаем удачи! 
+    <p class="end-page__top-text">
+      обнови<br>маник
     </p>
-    <button class="end-page__button" type="button">
-      выбрать другой дизайн
-    </button>
+    <p class="end-page__text">
+      Супер!<br>Тебе остался 1&nbsp;шаг для участия: оставь свой номер для проверки подписки МТС Premium
+    </p>
+    <p class="end-page__label">
+      Оставь свой номер для участия в конкурсе
+    </p>
+    <input class="end-page__input" type="tel" value="+7" name="phone number">
+    <div class="end-page__checkbox-container">
+      <div class="end-page__checkbox">
+        <img class="end-page__checkbox-arrow" src="./images/checkbox-arrow.svg" alt="">
+      </div>
+      <p class="end-page__checkbox-text">
+        Ознакомлен и согласен с обработкой персональных данных
+      </p>
+    </div>
+    <img class="end-page__button" src="./images/number-page-btn.png" alt="">
   </div>
+  <script src="jquery.min.js"></script>
+  <script src="wScratchPad.min.js"></script>
+  <script src="easytimer.min.js"></script>
   <script src="./main.js" type="module"></script>
-  <!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-  (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-  m[i].l=1*new Date();
-  for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-  k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-  (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-  ym(95739159, "init", {
-       clickmap:true,
-       trackLinks:true,
-       accurateTrackBounce:true,
-       webvisor:true
-  });
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/95739159" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+  <script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+  
+    ym(95739159, "init", {
+         clickmap:true,
+         trackLinks:true,
+         accurateTrackBounce:true,
+         webvisor:true
+    });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/95739159" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
 </body>
 </html>

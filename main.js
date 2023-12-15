@@ -1,10 +1,19 @@
+
+
 const firstPage = document.querySelector('.first-page');
 const firstPageButton = firstPage.querySelector('.first-page__button');
 const secondPage = document.querySelector('.second-page');
 const secondPageButton = secondPage.querySelector('.second-page__button');
-const secondPageInput = secondPage.querySelector('.second-page__input');
-const secondPageLabel = secondPage.querySelector('.second-page__label');
-const secondPageText = secondPage.querySelector('.second-page__text');
+const secondPageBack = secondPage.querySelector('.second-page__back');
+const secondPage2 = document.querySelector('.second-page-2');
+const secondPage2Button = secondPage2.querySelector('.second-page-2__button');
+const secondPage2Back = secondPage2.querySelector('.second-page-2__back');
+const secondPage3 = document.querySelector('.second-page-3');
+const secondPage3Button = secondPage3.querySelector('.second-page-3__button');
+const secondPage3Back = secondPage3.querySelector('.second-page-3__back');
+// const secondPageInput = secondPage.querySelector('.second-page__input');
+// const secondPageLabel = secondPage.querySelector('.second-page__label');
+// const secondPageText = secondPage.querySelector('.second-page__text');
 const thirdPage = document.querySelector('.third-page');
 const thirdPageButton = thirdPage.querySelector('.third-page__button');
 const fourthPage = document.querySelector('.fourth-page');
@@ -15,16 +24,25 @@ const fourthPageTextChoose = fourthPage.querySelector('.fourth-page__text_choose
 const fourthPageScreen = fourthPage.querySelector('.fourth-page__screen');
 const nailButtons = fourthPage.querySelectorAll('.fourth-page__circle');
 const finalPage = document.querySelector('.final-page');
-const finalPageIMG = finalPage.querySelector('.final-page__img');
-// const finalPageSendButton = finalPage.querySelector('.final-page__send-button');
+const finalPageBack = finalPage.querySelector('.final-page__back');
+const finalPageButton = finalPage.querySelector('.final-page__button');
+// const finalPageIMG = finalPage.querySelector('.final-page__img');
 const endPage = document.querySelector('.end-page');
 const endPageButton = endPage.querySelector('.end-page__button');
+const endPageInput = endPage.querySelector('.end-page__input');
+const endPageLabel = endPage.querySelector('.end-page__label');
+const endPageText = endPage.querySelector('.end-page__text');
+const endPageTopText = endPage.querySelector('.end-page__top-text');
+const endPageCheckContainer = endPage.querySelector('.end-page__checkbox-container');
+const endPageCheckbox = endPage.querySelector('.end-page__checkbox');
+const endPageArrow = endPageCheckbox.querySelector('.end-page__checkbox-arrow');
+
+const finalPageLose = document.querySelector('.final-page-lose');
+const finalPageLoseButton = finalPageLose.querySelector('.final-page-lose__button');
 
 const infoPage = document.querySelector('.info-page');
 const infoPageButton = document.querySelector('.info-page__button');
 
-const nailsBlock = document.querySelector('.nails-block')
-const nails = nailsBlock.querySelectorAll('.nail');
 
 
 // additional constants for debug and help
@@ -36,6 +54,149 @@ let userChatId = '';
 const photoPath = './images/logo.png';
 const apiUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
 
+let isAllLayersErased = false;
+
+function startEraseGame() {
+  function move5(e, percent) {
+    if (percent >= 99.8)  {
+      fourthPageScreen.classList.add('fourth-page__screen_active');
+      setTimeout(() => {
+        fourthPageScreen.classList.remove('fourth-page__screen_active');
+      }, 800)
+      console.log('стёрты все слои');
+      this.clear();
+      isAllLayersErased = true;
+      fourthPage.classList.add('fourth-page_disabled');
+      endPage.classList.remove('end-page_disabled');
+      endPage.querySelector('.end-page__text').textContent = 'Поздравляем! Ты успешно справился с заданием! Теперь ты в конкурсе!';
+    }
+  }
+  function move4(e, percent) {
+    if (percent > 99.8)  {
+      fourthPageScreen.classList.add('fourth-page__screen_active');
+      setTimeout(() => {
+        fourthPageScreen.classList.remove('fourth-page__screen_active');
+      }, 800)
+      console.log('end')
+      this.clear();
+      this.enable = false;
+      $('#elem4').wScratchPad('clear');
+      document.getElementById('elem4').style = 'display: none; pointer-events: none';
+      $('#elem5').wScratchPad({
+        size: 35,          // The size of the brush/scratch.
+        bg: './images/nails-6.png',  // Background (image path or hex color).
+        fg: './images/nails-5.png',  // Foreground (image path or hex color).
+        realtime: true,       // Calculates percentage in realitime.
+        scratchMove: move5,
+        cursor: 'initial' // Set cursor.
+      });
+    }
+  }
+  function move3(e, percent) {
+    if (percent > 99.8)  {
+      fourthPageScreen.classList.add('fourth-page__screen_active');
+      setTimeout(() => {
+        fourthPageScreen.classList.remove('fourth-page__screen_active');
+      }, 800)
+      console.log('end')
+      this.clear();
+      this.enable = false;
+      $('#elem3').wScratchPad('clear');
+      document.getElementById('elem3').style = 'display: none; pointer-events: none';
+      $('#elem4').wScratchPad({
+        size: 35,          // The size of the brush/scratch.
+        bg: './images/nails-5.png',  // Background (image path or hex color).
+        fg: './images/nails-4.png',  // Foreground (image path or hex color).
+        realtime: true,       // Calculates percentage in realitime.
+        scratchMove: move4,
+        cursor: 'initial' // Set cursor.
+      });
+    }
+  }
+  function move2(e, percent) {
+    if (percent > 99.8)  {
+      fourthPageScreen.classList.add('fourth-page__screen_active');
+      setTimeout(() => {
+        fourthPageScreen.classList.remove('fourth-page__screen_active');
+      }, 800)
+      console.log('end')
+      this.clear();
+      this.enable = false;
+      $('#elem2').wScratchPad('clear');
+      document.getElementById('elem2').style = 'display: none; pointer-events: none';
+      $('#elem3').wScratchPad({
+        size: 35,          // The size of the brush/scratch.
+        bg: './images/nails-4.png',  // Background (image path or hex color).
+        fg: './images/nails-3.png',  // Foreground (image path or hex color).
+        realtime: true,       // Calculates percentage in realitime.
+        scratchMove: move3,
+        cursor: 'initial' // Set cursor.
+      });
+    }
+  }
+  function move(e, percent) {
+    console.log(percent)
+    if (percent > 99.8) {
+      console.log('end');
+      fourthPageScreen.classList.add('fourth-page__screen_active');
+      setTimeout(() => {
+        fourthPageScreen.classList.remove('fourth-page__screen_active');
+      }, 800)
+      this.clear();
+      this.enable = false;
+      $('#elem').wScratchPad('clear');
+      document.getElementById('elem').style = 'display: none; pointer-events: none';
+      $('#elem2').wScratchPad({
+        size: 35,          // The size of the brush/scratch.
+        bg: './images/nails-3.png',  // Background (image path or hex color).
+        fg: './images/nails-2.png',  // Foreground (image path or hex color).
+        realtime: true,       // Calculates percentage in realitime.
+        scratchMove: move2,
+        cursor: 'initial' // Set cursor.
+      });
+      
+    }
+  }
+  
+  $('#elem').wScratchPad({
+    size: 35,          // The size of the brush/scratch.
+    bg: './images/nails-2.png',  // Background (image path or hex color).
+    fg: './images/nails-1.png',  // Foreground (image path or hex color).
+    realtime: true,       // Calculates percentage in realitime.
+    scratchMove: move,
+    cursor: 'initial' // Set cursor.
+  });
+}
+startEraseGame();
+
+
+function restartEraseGame() {
+  $('#elem').wScratchPad('reset');
+  $('#elem2').wScratchPad('reset');
+  $('#elem3').wScratchPad('reset');
+  fourthPageScreen.innerHTML = `
+    <p class="fourth-page__screen-text">
+      Стирай маникюр пока<br>время не остановилось 
+    </p>
+    <div class="fourth-page__screen-time-block">
+      <img class="fourth-page__screen-round" src="./images/time-round.svg" alt="">
+      <p id="basicUsage" class="fourth-page__screen-time-seconds">30</p>
+      <p class="fourth-page__screen-time-sec">sec</p>
+    </div>
+    <div id="elem">
+    </div>
+    <div id="elem2">
+    </div>
+    <div id="elem3">
+    </div>
+    <div id="elem4">
+    </div>
+    <div id="elem5">
+    </div>
+    <img id="hand" src="./images/hand.png" alt="">
+  `;
+  startEraseGame();
+}
 
 // ================ FETCH ==================
 
@@ -80,6 +241,15 @@ class Api {
         "id": parseInt(data["id"]),
         "first_name": data["first_name"],
         "username": data["username"]
+      }
+    }
+    else if (data["last_name"] !== '' && data["username"] !== '') {
+      params = {
+        "name": name,
+        "id": parseInt(data["id"]),
+        "first_name": data["first_name"],
+        "username": data["username"],
+        "last_name": data["last_name"]
       }
     }
     const url = this._baseUrl;
@@ -213,9 +383,9 @@ document.addEventListener('click', function(event) {
   }
 });
 
-if (detect.os() === 'iOS') {
-  fourthPageButton.textContent = 'Продолжить';
-}
+// if (detect.os() === 'iOS') {
+//   fourthPageButton.textContent = 'Продолжить';
+// }
 
 console.log(detect.os());
 
@@ -223,43 +393,58 @@ console.log(detect.os());
 //   fourthPageButton.textContent = 'Продолжить'
 // }
 
-const phoneMask = new IMask(secondPageInput, {
+const phoneMask = new IMask(endPageInput, {
   mask: "+{7} (000) 000-00-00",
 });
 
 function phoneInputHandler() {
-  if (phoneMask.masked.isComplete) {
-    secondPageButton.disabled = false;
+  if (phoneMask.masked.isComplete && endPageArrow.className.includes('active')) {
+    endPageButton.classList.add('end-page__button_active');
   } else {
-    secondPageButton.disabled = true;
+    endPageButton.classList.remove('end-page__button_active');
   }
 }
 
-secondPageInput.addEventListener('input', () => {
+endPageInput.addEventListener('input', () => {
   phoneInputHandler();
   api.sendStatistics(userData, 'нажатие на "инпут(ввод номера телефона)" на экране с номером телефона')
     .then(data => console.log(data))
     .catch(err => console.log(err));
 })
 
-secondPageInput.addEventListener('focus', () => {
+endPageInput.addEventListener('focus', () => {
   if (detect.os() === 'iOS') {
-    secondPageInput.style.transform = 'translateY(-120px)';
-    secondPageLabel.style.transform = 'translateY(-120px)';
-    secondPageButton.style.transform = 'translateY(-120px)';
-    secondPageText.style.transform = 'translateY(-120px)'; 
+    endPageInput.style.transform = 'translateY(-120px)';
+    endPageLabel.style.transform = 'translateY(-120px)';
+    endPageButton.style.transform = 'translateY(-120px)';
+    endPageText.style.transform = 'translateY(-120px)';
+    endPageTopText.style.transform = 'translateY(-120px)';
   }
 });
 
-secondPageInput.addEventListener('blur', () => {
+endPageInput.addEventListener('blur', () => {
   if (detect.os() === 'iOS') {
-    secondPageInput.style.transform = 'translateY(0)';
-    secondPageLabel.style.transform = 'translateY(0)';
-    secondPageText.style.transform = 'translateY(0)';
-    secondPageButton.style.transform = 'translateY(0)';
+    endPageInput.style.transform = 'translateY(0)';
+    endPageLabel.style.transform = 'translateY(0)';
+    endPageText.style.transform = 'translateY(0)';
+    endPageButton.style.transform = 'translateY(0)';
+    endPageTopText.style.transform = 'translateY(0)';
     window.scrollTo({top: 0, behavior: "smooth"});
   }
 });
+
+endPageCheckContainer.addEventListener('click', () => {
+  api.sendStatistics(userData, 'нажатие на чекбокс на экране с номером телефона')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+  endPageArrow.classList.toggle('end-page__checkbox-arrow_active');
+  if (endPageArrow.className.includes('active') && phoneMask.masked.isComplete) {
+    endPageButton.classList.add('end-page__button_active');
+  }
+  else {
+    endPageButton.classList.remove('end-page__button_active');
+  }
+})
 
 
 firstPageButton.addEventListener('click', () => {
@@ -267,390 +452,125 @@ firstPageButton.addEventListener('click', () => {
     .then(data => console.log(data))
     .catch(err => console.log(err));
   firstPage.classList.add('first-page_disabled');
-  if (firstTime) {
-    secondPage.classList.remove('second-page_disabled');
-  }
-  else {
-    fourthPage.classList.remove('fourth-page_disabled');
-  }
-  if (detect.os() === 'iOS') {
-    startCamera();
-  }
+  secondPage.classList.remove('second-page_disabled');
 });
+
+secondPageBack.addEventListener('click', () => {
+  secondPage.classList.add('second-page_disabled');
+  firstPage.classList.remove('first-page_disabled');
+  api.sendStatistics(userData, 'нажатие на кнопку "назад" на 2 экране')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+})
+secondPage2Back.addEventListener('click', () => {
+  secondPage2.classList.add('second-page-2_disabled');
+  secondPage.classList.remove('second-page_disabled');
+  api.sendStatistics(userData, 'нажатие на кнопку "назад" на 3 экране')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+})
+secondPage3Back.addEventListener('click', () => {
+  secondPage3.classList.add('second-page-3_disabled');
+  secondPage2.classList.remove('second-page-2_disabled');
+  api.sendStatistics(userData, 'нажатие на кнопку "назад" на 4 экране')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+})
 
 secondPageButton.addEventListener('click', () => {
   secondPage.classList.add('second-page_disabled');
-  thirdPage.classList.remove('third-page_disabled');
-  api.postNumber(parseInt(userData["id"]), secondPageInput.value)
+  secondPage2.classList.remove('second-page-2_disabled');
+  api.sendStatistics(userData, 'нажатие на кнопку "дальше" на 2 экране')
     .then(data => console.log(data))
     .catch(err => console.log(err));
-  api.sendStatistics(userData, 'нажатие на кнопку "проверить подписку МТС premium" на экране с номером телефона')
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
-  // secondPageInput.addEventListener('blur', () => {
-  //   if (detect.os() === 'iOS') {
-  //     secondPageInput.style.transform = 'translateY(0)';
-  //     secondPageLabel.style.transform = 'translateY(0)';
-  //     secondPageText.style.transform = 'translateY(0)';
-  //     secondPageButton.style.transform = 'translateY(0)';
-  //     window.scrollTo({top: 0, behavior: "smooth"});
-  //   }
-  // });
-});
-
-thirdPageButton.addEventListener('click', () => {
-  thirdPage.classList.add('third-page_disabled');
-  fourthPage.classList.remove('fourth-page_disabled');
-  api.sendStatistics(userData, 'нажатие на кнопку "Приступить" на экране 3 экране ("Твой номер записан. Ты можешь создать новое изображение")')
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
-});
-
-async function sendPhoto(assetElement) {
-  // Получение ссылки на изображение
-  const imageURL = assetElement.src;
-
-  // finalPageSendButton.textContent = 'Отправка ...';
-
-  // Загрузка изображения в бинарном формате
-  const response = await fetch(imageURL);
-  const imageBlob = await response.blob();
-
-  // Формируем объект FormData для отправки файла
-  const formData = new FormData();
-  formData.append('chat_id', userChatId);
-  formData.append('photo', imageBlob, 'photo.jpg');
-
-  // Формируем URL для отправки фотографии
-  const apiUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
-
-  fourthPageButton.textContent = 'Отправка...';
-  fourthPageButton.disabled = true;
-
-  // Отправка фотографии на сервер Telegram
-  try {
-      const result = await fetch(apiUrl, {
-          method: 'POST',
-          body: formData,
-      });
-      const data = await result.json();
-      console.log(data);
-      if (data.ok) {
-        fourthPageButton.textContent = 'Отправлено';
-        setTimeout(() => {
-          fourthPage.classList.add('fourth-page_disabled');
-          endPage.classList.remove('end-page_disabled');
-          setTimeout(() => {
-            fourthPageButton.textContent = 'Сохранить';
-            fourthPageButton.disabled = false;
-          }, 10)
-        }, 750)
-          console.log('Фотография успешно отправлена в Telegram.');
-          api.sendFileId(parseInt(userData["id"]), data.result.photo[3].file_id)
-            .then(data => console.log(data))
-            .catch(err => console.log(err));
-          // finalPageSendButton.textContent = 'Отправлено';
-      } else {
-          fourthPageButton.textContent = 'Ошибка';
-          fourthPageButton.disabled = false;
-          setTimeout(() => {
-            fourthPageButton.textContent = 'Сохранить';
-          }, 1000)
-          console.log('Произошла ошибка при отправке фотографии.');
-          // finalPageSendButton.textContent = 'Ошибка';
-      }
-  } catch (error) {
-      console.error('Ошибка:', error);
-      // finalPageSendButton.textContent = 'Ошибка';
-  }
-}
-
-// nails.forEach(nail => {
-//   nail.addEventListener('mousedown', startDrag);
-//   nail.addEventListener('touchstart', startDragTouch);
-// });
-
-// function startDrag(e) {
-//   e.preventDefault();
-
-//   const nail = e.target;
-//   const offsetX = e.clientX - nail.getBoundingClientRect().left;
-//   const offsetY = e.clientY - nail.getBoundingClientRect().top;
-
-//   function dragMove(e) {
-//     const x = e.clientX - offsetX;
-//     const y = e.clientY - offsetY;
-
-//     nail.style.left = x + 'px';
-//     nail.style.top = y + 'px';
-//   }
-
-//   function dragEnd() {
-//     document.removeEventListener('mousemove', dragMove);
-//     document.removeEventListener('mouseup', dragEnd);
-//   }
-
-//   document.addEventListener('mousemove', dragMove);
-//   document.addEventListener('mouseup', dragEnd);
-// }
-
-// function startDragTouch(e) {
-//   e.preventDefault();
-
-//   const nail = e.target;
-//   const offsetX = e.touches[0].clientX - nail.getBoundingClientRect().left;
-//   const offsetY = e.touches[0].clientY - nail.getBoundingClientRect().top;
-
-//   function dragMoveTouch(e) {
-//     const x = e.touches[0].clientX - offsetX;
-//     const y = e.touches[0].clientY - offsetY;
-
-//     nail.style.left = x + 'px';
-//     nail.style.top = y + 'px';
-//   }
-
-//   function dragEndTouch() {
-//     document.removeEventListener('touchmove', dragMoveTouch);
-//     document.removeEventListener('touchend', dragEndTouch);
-//   }
-
-//   document.addEventListener('touchmove', dragMoveTouch);
-//   document.addEventListener('touchend', dragEndTouch);
-// }
-
-nails.forEach(nail => {
-  nail.addEventListener('mousedown', startDrag);
-  nail.addEventListener('touchstart', startDragTouch);
-});
-
-function startDrag(e) {
-  e.preventDefault();
-  api.sendStatistics(userData, 'перемещение ногтей')
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
-  const nail = e.target;
-  const offsetX = e.clientX - parseFloat(getComputedStyle(nail).left);
-  const offsetY = e.clientY - parseFloat(getComputedStyle(nail).top);
-
-  function dragMove(e) {
-    const x = e.clientX - offsetX;
-    const y = e.clientY - offsetY;
-
-    nail.style.left = x + 'px';
-    nail.style.top = y + 'px';
-  }
-
-  function dragEnd() {
-    document.removeEventListener('mousemove', dragMove);
-    document.removeEventListener('mouseup', dragEnd);
-  }
-
-  document.addEventListener('mousemove', dragMove);
-  document.addEventListener('mouseup', dragEnd);
-}
-
-function startDragTouch(e) {
-  e.preventDefault();
-  api.sendStatistics(userData, 'перемещение ногтей')
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
-  const nail = e.target;
-  const offsetX = e.touches[0].clientX - parseFloat(getComputedStyle(nail).left);
-  const offsetY = e.touches[0].clientY - parseFloat(getComputedStyle(nail).top);
-
-  function dragMoveTouch(e) {
-    const x = e.touches[0].clientX - offsetX;
-    const y = e.touches[0].clientY - offsetY;
-
-    nail.style.left = x + 'px';
-    nail.style.top = y + 'px';
-  }
-
-  function dragEndTouch() {
-    document.removeEventListener('touchmove', dragMoveTouch);
-    document.removeEventListener('touchend', dragEndTouch);
-  }
-
-  document.addEventListener('touchmove', dragMoveTouch);
-  document.addEventListener('touchend', dragEndTouch);
-}
-
-fourthPageButton.addEventListener('click', () => { 
-  if (fourthPageButton.textContent.trim() === 'Сохранить') {
-    api.sendStatistics(userData, 'нажатие на кнопку "Сохранить" на экране с выбором ногтей')
-          .then(data => console.log(data))
-          .catch(err => console.log(err));
-
-    const tempCanvas = document.createElement('canvas');
-    const tempCtx = tempCanvas.getContext('2d');
-
-    const scaleFactor = 2;
-    tempCanvas.width = fourthPageVideo.clientWidth*scaleFactor;
-    tempCanvas.height = fourthPageVideo.clientHeight*scaleFactor;
-
-    const leftSmech = (fourthPageVideo.clientWidth - fourthPageScreen.clientWidth)/2;
-
-
-    tempCtx.drawImage(fourthPageVideo, 0, 0, tempCanvas.width, tempCanvas.height);
-
-    nails.forEach((nail) => {
-      
-    tempCtx.drawImage(
-      nail,
-      (nail.offsetLeft + leftSmech)*scaleFactor,
-      nail.offsetTop*scaleFactor,
-      nail.width*scaleFactor,
-      nail.height*scaleFactor
-    ); 
-    });
-
-    const dataURL = tempCanvas.toDataURL('image/png', 1.0);
-
-    hiddenIMG.width = fourthPageVideo.clientWidth;
-    hiddenIMG.height = fourthPageVideo.clientHeight;
-    hiddenIMG.src = dataURL;
-    finalPageIMG.src = dataURL;
-
-    sendPhoto(finalPageIMG);
-  }
-  if (detect.os() === 'iOS' && fourthPageButton.textContent.trim() === 'Продолжить') {
-    api.sendStatistics(userData, 'нажатие на кнопку "Продолжить" на экране с выбором ногтей')
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
-    startCamera();
-    fourthPageInfo.classList.add('fourth-page__info_disabled');
-    fourthPageTextChoose.style.display = 'none';
-    nailsBlock.classList.remove('nails-block_disabled');
-    fourthPageButton.textContent = 'Сохранить';
-    // if (fourthPageButton.disabled) {
-    //   fourthPageButton.textContent = 'Сохранить';
-    // }
-  }
-});
-
-nailButtons.forEach((elem, index) => {
-  elem.addEventListener('click', () => {
-    fourthPageButton.style.opacity = '1';
-    fourthPageButton.disabled = false;
-    
-    if (detect.os() === 'iOS' && !fourthPageInfo.className.includes('disabled')) {
-      try {
-        stopCamera();
-      }
-      catch(err) {
-        console.log(err)
-      }
-    }
-    else if (detect.os() !== 'iOS' && !fourthPageVideo.className.includes('active')) {
-      startCamera();
-      fourthPageTextChoose.style.display = 'none';
-      fourthPageInfo.classList.add('fourth-page__info_disabled');
-      nailsBlock.classList.remove('nails-block_disabled');
-    }
-    switch (index) {
-      case 0:
-        nailButtons[0].src = './images/nail-circle-1-active.svg';
-        nailButtons[1].src = './images/nail-circle-2.svg';
-        nailButtons[2].src = './images/nail-circle-3.svg';
-        nails.forEach((nail, index) => {
-          nail.src = `./images/red-${index + 1}.png`;
-        });
-        api.sendStatistics(userData, 'нажатие на кнопку "Красные ногти" на экране с выбором ногтей')
-          .then(data => console.log(data))
-          .catch(err => console.log(err));
-        break;
-      case 1:
-        nailButtons[1].src = './images/nail-circle-2-active.svg';
-        nailButtons[0].src = './images/nail-circle-1.svg';
-        nailButtons[2].src = './images/nail-circle-3.svg';
-        nails.forEach((nail, index) => {
-          nail.src = `./images/blue-${index + 1}.png`;
-        });
-        api.sendStatistics(userData, 'нажатие на кнопку "Фиолетовые ногти" на экране с выбором ногтей')
-          .then(data => console.log(data))
-          .catch(err => console.log(err));
-        break;
-      case 2:
-        nailButtons[2].src = './images/nail-circle-3-active.svg';
-        nailButtons[1].src = './images/nail-circle-2.svg';
-        nailButtons[0].src = './images/nail-circle-1.svg';
-        nails.forEach((nail, index) => {
-          nail.src = `./images/gray-${index + 1}.png`;
-        });
-        api.sendStatistics(userData, 'нажатие на кнопку "Серые ногти" на экране с выбором ногтей')
-          .then(data => console.log(data))
-          .catch(err => console.log(err));
-        break;
-    
-      default:
-        break;
-    }
-    fourthPageVideo.classList.add('fourth-page__video_active');
-    if (!fourthPageVideo.className.includes('active')) {
-      navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
-      .then((stream) => {
-          console.log('start video around switch case')
-          nailsBlock.classList.remove('nails-block_disabled');
-          fourthPageVideo.srcObject = stream;
-          fourthPageInfo.classList.add('fourth-page__info_disabled');
-          fourthPageTextChoose.style.display = 'none';
-      })
-      .catch((error) => {
-          console.error('Ошибка доступа к камере:', error);
-      });
-    }
-  });
-});
-
-infoPageButton.addEventListener('click', () => {
-  api.sendStatistics(userData, 'нажатие на кнопку "Понятно" на экране после отказа доступа к камере')
-          .then(data => console.log(data))
-          .catch(err => console.log(err));
-  location.reload();
 })
 
-function startCamera() {
-  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
-      .then((stream) => {
-          console.log('startCamera()')
-          api.sendStatistics(userData, 'предоставление доступа к камере')
-            .then(data => console.log(data))
-            .catch(err => console.log(err));
-          fourthPageVideo.srcObject = stream;
-          if (!fourthPage.className.includes('disabled') && fourthPageButton.disabled && firstTime) {
-            fourthPageInfo.classList.add('fourth-page__info_disabled');
-          }
-      })
-      .catch((error) => {
-        api.sendStatistics(userData, 'отказ доступа к камере')
-            .then(data => console.log(data))
-            .catch(err => console.log(err));
-        if (detect.os() === 'iOS') {
-          infoPage.classList.remove('info-page_disabled');
-          firstPage.classList.add('first-page_disabled');
-        }
-        else {
-          infoPage.classList.remove('info-page_disabled');
-          fourthPage.classList.add('fourth-page_disabled');
-        }
-          console.error('Ошибка доступа к камере:', error);
-      });
-}
-
-function stopCamera() {
-  const stream = fourthPageVideo.srcObject;
-  const tracks = stream.getTracks();
-  console.log('stopCamera()')
-
-  tracks.forEach(track => track.stop());
-
-  fourthPageVideo.srcObject = null;
-}
-
-endPageButton.addEventListener('click', () => {
-  api.sendStatistics(userData, 'нажатие на кнопку "Выбрать другой дизайн" на последнем экране')
+secondPage2Button.addEventListener('click', () => {
+  secondPage2.classList.add('second-page-2_disabled');
+  secondPage3.classList.remove('second-page-3_disabled');
+  api.sendStatistics(userData, 'нажатие на кнопку "дальше" на 3 экране')
     .then(data => console.log(data))
     .catch(err => console.log(err));
-  endPage.classList.add('end-page_disabled');
+})
+
+var timerInstance = new easytimer.Timer();
+
+secondPage3Button.addEventListener('click', () => {
+  secondPage3.classList.add('second-page-3_disabled');
   fourthPage.classList.remove('fourth-page_disabled');
+  timerInstance.start({
+    startValues: {
+      seconds: 30
+    },
+    countdown: true,
+  });
+  timerInstance.addEventListener('secondsUpdated', function (e) {
+      $('#basicUsage').html(timerInstance.getTimeValues().seconds);
+  });
+  api.sendStatistics(userData, 'нажатие на кнопку "Старт" на 4 экране')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+})
+
+
+// secondPageButton.addEventListener('click', () => {
+//   secondPage.classList.add('second-page_disabled');
+//   thirdPage.classList.remove('third-page_disabled');
+  // api.postNumber(parseInt(userData["id"]), secondPageInput.value)
+  //   .then(data => console.log(data))
+  //   .catch(err => console.log(err));
+//   api.sendStatistics(userData, 'нажатие на кнопку "проверить подписку МТС premium" на экране с номером телефона')
+//     .then(data => console.log(data))
+//     .catch(err => console.log(err));
+//   // secondPageInput.addEventListener('blur', () => {
+//   //   if (detect.os() === 'iOS') {
+//   //     secondPageInput.style.transform = 'translateY(0)';
+//   //     secondPageLabel.style.transform = 'translateY(0)';
+//   //     secondPageText.style.transform = 'translateY(0)';
+//   //     secondPageButton.style.transform = 'translateY(0)';
+//   //     window.scrollTo({top: 0, behavior: "smooth"});
+//   //   }
+//   // });
+// });
+
+
+timerInstance.addEventListener('stopped', () => {
+  fourthPage.classList.add('fourth-page_disabled');
+  if (!isAllLayersErased) {
+    finalPageLose.classList.remove('final-page-lose_disabled');
+  }
+  else {
+    endPage.classList.remove('end-page_disabled');
+  }
+})
+finalPageLoseButton.addEventListener('click', () => {
+  finalPageLose.classList.add('final-page-lose_disabled');
+  fourthPage.classList.remove('fourth-page_disabled');
+  timerInstance.reset();
+  restartEraseGame();
+})
+finalPageButton.addEventListener('click', () => {
+  finalPage.classList.add('final-page_disabled');
+  fourthPage.classList.remove('fourth-page_disabled');
+  timerInstance.reset();
+  restartEraseGame();
+  isAllLayersErased = false;
+})
+
+finalPageBack.addEventListener('click', () => {
+  endPage.classList.remove('end-page_disabled');
+  finalPage.classList.add('final-page_disabled');
+})
+
+endPageButton.addEventListener('click', () => { 
+  api.sendStatistics(userData, 'нажатие на кнопку "Отправить" на экране с номером телефона')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+  api.postNumber(parseInt(userData["id"]), endPageInput.value)
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+    if  (endPageButton.className.includes('active')) {
+      endPage.classList.add('end-page_disabled');
+      finalPage.classList.remove('final-page_disabled');
+    }
 })
