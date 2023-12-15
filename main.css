@@ -141,6 +141,9 @@ button:hover {
   margin-top: auto;
   margin-bottom: 23.5px;
 }
+.first-page__button:hover {
+  cursor: pointer;
+}
 .first-page__help-img {
   position: absolute;
   z-index: 1;
@@ -212,6 +215,9 @@ button:hover {
   top: 23.5px;
   left: 26px;
 }
+.back-btn:hover {
+  cursor: pointer;
+}
 
 .second-page__top-text {
   position: absolute;
@@ -276,6 +282,10 @@ button:hover {
   z-index: 10;
 }
 
+.second-page__button:hover {
+  cursor: pointer;
+}
+
 /* =============== SECOND-PAGE-2 ============== */
 
 .second-page-2 {
@@ -316,6 +326,9 @@ button:hover {
   margin-top: auto;
   position: relative;
   z-index: 10;
+}
+.second-page-2__button:hover {
+  cursor: pointer;
 }
 /* ============= SECOND-PAGE-2 ============== */
 .second-page-3 {
@@ -374,6 +387,9 @@ button:hover {
   margin-top: auto;
   position: relative;
   z-index: 10;
+}
+.second-page-3__button:hover {
+  cursor: pointer;
 }
 /*  =========== THIRD-PAGE ================ */
 
@@ -610,6 +626,9 @@ line-height: 24px; /* 109.091% */
   margin-bottom: 27.86px;
   width: 100%;
 }
+.final-page__button:hover {
+  cursor: pointer;
+}
 
 /* ========FINAL-PAGE-LOSE =========== */
 
@@ -676,6 +695,9 @@ line-height: 24px; /* 109.091% */
   margin-top: auto;
   margin-bottom: 27.86px;
   width: 100%;
+}
+.final-page-lose__button:hover {
+  cursor: pointer;
 }
 
 @media screen and (max-height: 646px) {
@@ -797,6 +819,9 @@ line-height: 24px; /* 109.091% */
   margin-bottom: 27.86px;
   opacity: .2;
   transition: opacity .3s linear;
+}
+.end-page__button:hover {
+  cursor: pointer;
 }
 
 .end-page__button_active {
