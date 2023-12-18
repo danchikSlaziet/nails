@@ -797,6 +797,7 @@ line-height: 24px; /* 109.091% */
   margin-bottom: 22px;
   width: 100%;
   text-align: center;
+  transition: transform .3s ease-out;
 }
 
 @media screen and (max-width: 390px) {
@@ -863,7 +864,7 @@ line-height: 24px; /* 109.091% */
   margin-top: auto;
   margin-bottom: 27.86px;
   opacity: .2;
-  transition: opacity .3s linear;
+  transition: opacity .3s linear, transform .3s ease-out;
 }
 .end-page__button:hover {
   cursor: pointer;

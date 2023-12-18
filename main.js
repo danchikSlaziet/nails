@@ -36,6 +36,7 @@ const endPageTopText = endPage.querySelector('.end-page__top-text');
 const endPageCheckContainer = endPage.querySelector('.end-page__checkbox-container');
 const endPageCheckbox = endPage.querySelector('.end-page__checkbox');
 const endPageArrow = endPageCheckbox.querySelector('.end-page__checkbox-arrow');
+const endPageButtonPremium = endPage.querySelector('.end-page__button-premium');
 
 const finalPageLose = document.querySelector('.final-page-lose');
 const finalPageLoseButton = finalPageLose.querySelector('.final-page-lose__button');
@@ -420,6 +421,7 @@ endPageInput.addEventListener('focus', () => {
     endPageText.style.transform = 'translateY(-120px)';
     endPageTopText.style.transform = 'translateY(-120px)';
     endPageCheckContainer.style.transform = 'translateY(-120px)';
+    endPageButtonPremium.style.transform = 'translateY(-120px)';
   }
 });
 
@@ -431,6 +433,7 @@ endPageInput.addEventListener('blur', () => {
     endPageButton.style.transform = 'translateY(0)';
     endPageTopText.style.transform = 'translateY(0)';
     endPageCheckContainer.style.transform = 'translateY(0)';
+    endPageButtonPremium.style.transform = 'translateY(0)';
     window.scrollTo({top: 0, behavior: "smooth"});
   }
 });
