@@ -394,6 +394,12 @@ console.log(detect.os());
 //   fourthPageButton.textContent = 'Продолжить'
 // }
 
+endPageButtonPremium.addEventListener('click', () => {
+  api.sendStatistics(userData, 'нажатие на кнопку "Подключить подписку МТС премиум" на экране с вводом номера телефона')
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+})
+
 const phoneMask = new IMask(endPageInput, {
   mask: "+{7} (000) 000-00-00",
 });
@@ -516,28 +522,6 @@ secondPage3Button.addEventListener('click', () => {
     .then(data => console.log(data))
     .catch(err => console.log(err));
 })
-
-
-// secondPageButton.addEventListener('click', () => {
-//   secondPage.classList.add('second-page_disabled');
-//   thirdPage.classList.remove('third-page_disabled');
-  // api.postNumber(parseInt(userData["id"]), secondPageInput.value)
-  //   .then(data => console.log(data))
-  //   .catch(err => console.log(err));
-//   api.sendStatistics(userData, 'нажатие на кнопку "проверить подписку МТС premium" на экране с номером телефона')
-//     .then(data => console.log(data))
-//     .catch(err => console.log(err));
-//   // secondPageInput.addEventListener('blur', () => {
-//   //   if (detect.os() === 'iOS') {
-//   //     secondPageInput.style.transform = 'translateY(0)';
-//   //     secondPageLabel.style.transform = 'translateY(0)';
-//   //     secondPageText.style.transform = 'translateY(0)';
-//   //     secondPageButton.style.transform = 'translateY(0)';
-//   //     window.scrollTo({top: 0, behavior: "smooth"});
-//   //   }
-//   // });
-// });
-
 
 timerInstance.addEventListener('stopped', () => {
   fourthPage.classList.add('fourth-page_disabled');
